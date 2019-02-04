@@ -30,7 +30,7 @@ public class Start3 extends AppCompatActivity implements GestureDetector.OnGestu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start3);
         ImageView image=findViewById(R.id.image);
-        Glide.with(this).asGif().load(R.drawable.start3is).into(image);
+       // Glide.with(this).asGif().load(R.drawable.start3is).into(image);
     }
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {

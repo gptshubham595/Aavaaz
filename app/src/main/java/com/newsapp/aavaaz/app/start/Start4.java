@@ -30,7 +30,7 @@ public class Start4 extends AppCompatActivity implements GestureDetector.OnGestu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start4);
         ImageView image=findViewById(R.id.image);
-        Glide.with(this).asGif().load(R.drawable.start1is).into(image);
+      //  Glide.with(this).asGif().load(R.drawable.start1is).into(image);
     }
 
     @Override
