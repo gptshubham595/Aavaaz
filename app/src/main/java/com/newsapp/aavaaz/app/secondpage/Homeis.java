@@ -203,15 +203,18 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
                 makedialog();
 
             }});
-
-
-
+        
         mAuth=FirebaseAuth.getInstance();
         storageReference= FirebaseStorage.getInstance().getReference();
-        if(first.equals("yes")){
+        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("isFirstRun", true);
+        if (isFirstRun) {
+            //Toast.makeText(getApplicationContext(), "Registering You!!", Toast.LENGTH_LONG).show();
             mfirst.setValue("no");
             Intent a=new Intent(getApplicationContext(),Start1.class);
             startActivity(a);
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                    .putBoolean("isFirstRun", false).apply();
         }
         geturl(); getsourceurl(); getheading();
         getimage();

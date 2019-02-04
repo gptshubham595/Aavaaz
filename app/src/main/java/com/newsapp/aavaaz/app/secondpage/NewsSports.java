@@ -258,8 +258,8 @@ public class NewsSports extends AppCompatActivity implements GestureDetector.OnG
         builder.setContentIntent(pendingIntent);
         builder.setAutoCancel(true);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher_foreground));
-        builder.setContentTitle("See ,This trending Political News,Salman khan has failed in his exams , please see and subscribe this news by CNN news channel");
-        builder.setContentText("Cool");
+        builder.setContentTitle("You are Seeing the best News App");
+        builder.setContentText("Aavaz");
         builder.setSubText("Tap to view" + "..");
         NotificationManager notificationManager=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(Notifyid,builder.build());
