@@ -99,8 +99,9 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
         });
         //         i=super.getIntent().getExtras().getInt("i");
      //  Toast.makeText(getApplicationContext(),i+"",Toast.LENGTH_SHORT).show();
-
-        DatabaseReference mfirst = FirebaseDatabase.getInstance().getReference().child("Users").child("first");
+        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = current_user.getUid();
+        DatabaseReference mfirst = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("first");
         mfirst.keepSynced(true);
 
         mfirst.addValueEventListener(new ValueEventListener() {
@@ -128,8 +129,8 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
         mAuth = FirebaseAuth.getInstance();
 
 //======================================================================================
-        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = current_user.getUid();
+
+
 
         DatabaseReference mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last").child("Homeis");
         mi.keepSynced(true);
@@ -203,18 +204,15 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
                 makedialog();
 
             }});
-        
+
+
+
         mAuth=FirebaseAuth.getInstance();
         storageReference= FirebaseStorage.getInstance().getReference();
-        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-                .getBoolean("isFirstRun", true);
-        if (isFirstRun) {
-            //Toast.makeText(getApplicationContext(), "Registering You!!", Toast.LENGTH_LONG).show();
+        if(first.equals("yes")){
             mfirst.setValue("no");
             Intent a=new Intent(getApplicationContext(),Start1.class);
             startActivity(a);
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putBoolean("isFirstRun", false).apply();
         }
         geturl(); getsourceurl(); getheading();
         getimage();
