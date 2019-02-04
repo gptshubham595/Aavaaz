@@ -85,7 +85,7 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_news_homeis);
-        first=super.getIntent().getExtras().getString("first");
+
 
         urllink=findViewById(R.id.urllink);
         urllink.setOnClickListener(new View.OnClickListener() {
@@ -100,20 +100,28 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
         //         i=super.getIntent().getExtras().getInt("i");
      //  Toast.makeText(getApplicationContext(),i+"",Toast.LENGTH_SHORT).show();
 
+        DatabaseReference mfirst = FirebaseDatabase.getInstance().getReference().child("Users").child("first");
+        mfirst.keepSynced(true);
 
-        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-                .getBoolean("isFirstRun", true);
-        if (first.equals("yes")) {
-            //Toast.makeText(getApplicationContext(), "Registering You!!", Toast.LENGTH_LONG).show();
-            DatabaseReference mshortdesc = FirebaseDatabase.getInstance().getReference().child("Users").child("first");
-            mshortdesc.keepSynced(true);
-            mshortdesc.setValue("no");
-            Intent a=new Intent(getApplicationContext(),Start1.class);
-            a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(a);
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putBoolean("isFirstRun", false).apply();
-        }
+        mfirst.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()){}
+                else{
+                    first = dataSnapshot.getValue(String.class);
+                }
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+
+            }
+        });
 
 //======================================================================
         heading=findViewById(R.id.heading);
@@ -200,7 +208,11 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
 
         mAuth=FirebaseAuth.getInstance();
         storageReference= FirebaseStorage.getInstance().getReference();
-
+        if(first.equals("yes")){
+            mfirst.setValue("no");
+            Intent a=new Intent(getApplicationContext(),Start1.class);
+            startActivity(a);
+        }
         geturl(); getsourceurl(); getheading();
         getimage();
         getshortdesc();
@@ -243,7 +255,7 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
         builder.setContentIntent(pendingIntent);
         builder.setAutoCancel(true);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher_foreground));
-        builder.setContentTitle("See ,This trending Sport News");
+        builder.setContentTitle("Best News App");
         builder.setContentText("Cool");
         builder.setSubText("Tap to view" + "..");
         NotificationManager notificationManager=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);

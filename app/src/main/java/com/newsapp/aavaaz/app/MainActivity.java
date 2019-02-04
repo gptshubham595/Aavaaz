@@ -233,8 +233,6 @@ loginUser(email,password);
                             if(!dataSnapshot.exists()){}
                             else{
                                  first = dataSnapshot.getValue(String.class);
-
-
                             }
 
                             }
