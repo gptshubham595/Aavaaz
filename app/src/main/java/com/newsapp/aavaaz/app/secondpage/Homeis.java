@@ -79,12 +79,14 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
     Dialog dialog;
 
     public static int i=1,Stat=0,tap=0;
-    public static String notf_head,url;
+    public static String notf_head,url,first;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_news_homeis);
+        first=super.getIntent().getExtras().getString("first");
+
         urllink=findViewById(R.id.urllink);
         urllink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,8 +103,11 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
 
         Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
-        if (isFirstRun) {
+        if (first.equals("yes")) {
             //Toast.makeText(getApplicationContext(), "Registering You!!", Toast.LENGTH_LONG).show();
+            DatabaseReference mshortdesc = FirebaseDatabase.getInstance().getReference().child("Users").child("first");
+            mshortdesc.keepSynced(true);
+            mshortdesc.setValue("no");
             Intent a=new Intent(getApplicationContext(),Start1.class);
             a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(a);

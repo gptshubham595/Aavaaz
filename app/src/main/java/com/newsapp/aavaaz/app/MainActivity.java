@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     TextView heading;
 
     int i = 0;
-    public static String aid,longitude="1",latitude="1",city="1",state="1",country="1";
+    public static String aid,longitude="1",latitude="1",city="1",state="1",country="1",first;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -232,23 +232,8 @@ loginUser(email,password);
                             // whenever data at this location is updated.
                             if(!dataSnapshot.exists()){}
                             else{
-                                final String value = dataSnapshot.getValue(String.class);
-                                    Thread a=new Thread(){
-                                    @Override
-                                    public void run() {
-                                        try{
-                                            sleep(200);
-                                        }catch (Exception e){e.printStackTrace();}
-                                        finally {
-                                            if(value.equals("yes")){
-                                            Intent a=new Intent(getApplicationContext(),Start1.class);
-                                            a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                                            startActivity(a);
-                                            CustomIntent.customType(MainActivity.this,"fadein-to-fadeout");
-                                        }}
-                                    }
-                                };
-                                a.start();
+                                 first = dataSnapshot.getValue(String.class);
+
 
                             }
 
@@ -266,6 +251,7 @@ loginUser(email,password);
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(getApplicationContext(), "Logged  In", Toast.LENGTH_SHORT).show();
                             Intent a=new Intent(getApplicationContext(),Homeis.class);
+                            a.putExtra("first",first);
                             startActivity(a);
                             finish();
                         }
