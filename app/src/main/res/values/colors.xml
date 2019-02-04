@@ -3,15 +3,15 @@
     <color name="nav">#ffffff</color>
     <color name="colorPrimary">#37474F</color>
 
-    <color name="colorPrimaryInverse">#37474f</color>
+    <color name="colorPrimaryInverse">#00ACC1</color>
 
     <!--Status Bar Color-->
     <color name="colorPrimaryDark">#263238</color>
     <color name="colorPrimaryDarkInverse">#00838F</color>
 
     <!--Accent Color-->
-    <color name="colorAccent">#ffffff</color>
-    <color name="colorAccentInverse">#ffffff</color>
+    <color name="colorAccent">#ef5350</color>
+    <color name="colorAccentInverse">#ef5350</color>
 
     <color name="textColor">#ffffff</color>
 

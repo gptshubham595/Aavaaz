@@ -21,7 +21,7 @@
         <item name="colorPrimary">#ff4000</item>
         <item name="colorPrimaryDark">#ff4000</item>
         <item name="SwipeFlingStyle">@style/SwipeFling</item>
-        <item name="android:navigationBarColor">#ff4000</item>
+        <item name="android:navigationBarColor">#ffffff</item>
         <item name="colorAccent">@color/colorAccent</item>
  <item name="android:windowAnimationStyle">@style/customActivityAnimation</item>
     
