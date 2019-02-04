@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content"
+        android:text="Categories.."
+        android:id="@+id/cat"
+        android:textSize="25sp"
+        android:fontFamily="@font/glegoo"/>
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/cat"
+        android:id="@+id/scroll"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+<RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="7dp"
+            android:background="@drawable/shape2"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:src="@drawable/homeis"
+                android:id="@+id/homeis"
+                android:layout_height="120dp"/>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_margin="3dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/homeis"
+        android:gravity="center"
+        android:text="Home"
+        android:textColor="#3c3c44"
+        android:textSize="12sp" />
+        </RelativeLayout><RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="7dp"
+            android:background="@drawable/shape2"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:src="@drawable/politics"
+                android:id="@+id/politics"
+                android:layout_height="120dp"/>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_margin="3dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/politics"
+        android:gravity="center"
+        android:text="Politics"
+        android:textColor="#3c3c44"
+        android:textSize="12sp" />
+        </RelativeLayout>
+<RelativeLayout
+            android:layout_width="match_parent"
+			android:background="@drawable/shape2"
+    android:layout_margin="7dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:src="@drawable/business"
+                android:id="@+id/business"
+                android:layout_height="120dp"/>
+            <TextView                        android:layout_width="100dp"   android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/business"
+            android:text="Business"
+            android:textColor="#3c3c44"
+            android:textSize="12sp"	/>
+        </RelativeLayout>
+		
+<RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="7dp"
+            android:background="@drawable/shape2"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:src="@drawable/crime"
+                android:id="@+id/international"
+                android:layout_height="120dp"/>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_margin="3dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/international"
+        android:gravity="center"
+        android:text="Crime"
+        android:textColor="#3c3c44"
+        android:textSize="12sp" />
+        </RelativeLayout>
+
+		<RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="7dp"
+            android:background="@drawable/shape2"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:src="@drawable/sports"
+                android:id="@+id/sports"
+                android:layout_height="120dp"/>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_margin="7dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sports"
+        android:gravity="center"
+        android:text="Sports"
+        android:textColor="#3c3c44"
+        android:textSize="12sp" />
+        </RelativeLayout>
+		
+
+<RelativeLayout
+            android:layout_width="match_parent"
+			android:background="@drawable/shape2"
+    android:layout_margin="7dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:src="@drawable/technology"
+                android:id="@+id/education"
+                android:layout_height="120dp"/>
+            <TextView                        android:layout_width="100dp"   android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/education"
+            android:text="Technology"
+            android:textColor="#3c3c44"
+            android:textSize="12sp"	/>
+        </RelativeLayout>
+<RelativeLayout
+            android:layout_width="match_parent"
+			android:background="@drawable/shape2"
+    android:layout_margin="7dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:src="@drawable/entertainment"
+                android:id="@+id/entertainment"
+                android:layout_height="120dp"/>
+            <TextView                        android:layout_width="108dp"   android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/entertainment"
+            android:text="Entertainment"
+            android:textColor="#3c3c44"
+            android:textSize="12sp"	/>
+        </RelativeLayout>
+<RelativeLayout
+            android:layout_width="match_parent"
+			android:background="@drawable/shape2"
+    android:layout_margin="7dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:src="@drawable/lifestyle"
+                android:id="@+id/lifestyle"
+                android:layout_height="120dp"/>
+            <TextView                        android:layout_width="100dp"   android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lifestyle"
+            android:text="LifeStyle"
+            android:textColor="#3c3c44"
+            android:textSize="12sp"	/>
+        </RelativeLayout>
+
+<RelativeLayout
+            android:layout_width="match_parent"
+			android:background="@drawable/shape2"
+    android:layout_margin="7dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:src="@drawable/misc"
+                android:id="@+id/gadgets"
+                android:layout_height="120dp"/>
+            <TextView
+                android:layout_width="100dp"   android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gadgets"
+            android:text="Miscellaneous"
+            android:textColor="#3c3c44"
+            android:textSize="12sp"	/>
+        </RelativeLayout>
+<RelativeLayout
+            android:layout_width="match_parent"
+    android:layout_margin="3dp"
+			android:background="@drawable/shape2"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:src="@drawable/viral"
+                android:id="@+id/agriculture"
+                android:layout_height="120dp"/>
+            <TextView                        android:layout_width="100dp"   android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/agriculture"
+            android:text="Viral"
+            android:textColor="#3c3c44"
+            android:textSize="12sp"	/>
+        </RelativeLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scroll"
+        android:id="@+id/text"
+        android:text=""
+        android:layout_margin="10dp"
+        android:textStyle="bold"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/text"
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_margin="2dp"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

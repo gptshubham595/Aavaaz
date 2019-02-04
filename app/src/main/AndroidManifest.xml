@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.newsapp.aavaaz.app">
+
+    <!-- Required to check whether user has network connection or not -->
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- Dangerous Permissions -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:name="com.newsapp.aavaaz.app.SampleApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.newsapp.aavaaz.app.activity.SampleActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme1">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.newsapp.aavaaz.app"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <activity
+            android:name="com.newsapp.aavaaz.app.Home"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.MainActivity2"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme1" />
+        <activity android:name="com.newsapp.aavaaz.app.fragment.SampleFragmentActivity" />
+        <activity android:name="com.newsapp.aavaaz.app.service.SampleServiceActivity" />
+
+        <service android:name="com.newsapp.aavaaz.app.service.SampleService" />
+
+        <activity
+            android:name="com.newsapp.aavaaz.app.secondpage.NewsAgriculture"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.secondpage.Homeis"
+            android:screenOrientation="portrait" />
+
+        <activity
+
+            android:name="com.newsapp.aavaaz.app.secondpage.NewsSports"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.secondpage.NewsBusiness"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.secondpage.NewsEducation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.secondpage.NewsEntertainment"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.secondpage.NewsInternational"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.secondpage.NewsGadgets"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.secondpage.NewsLifestyle"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.secondpage.NewsPolitics"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.thirdpage.NewsAgricultureFull"
+            android:parentActivityName="com.newsapp.aavaaz.app.secondpage.NewsAgriculture"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.thirdpage.NewsSportsFull"
+            android:parentActivityName="com.newsapp.aavaaz.app.secondpage.NewsSports"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.thirdpage.NewsBusinessFull"
+            android:parentActivityName="com.newsapp.aavaaz.app.secondpage.NewsBusiness"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.thirdpage.NewsEducationFull"
+            android:parentActivityName="com.newsapp.aavaaz.app.secondpage.NewsEducation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.thirdpage.NewsEntertainmentFull"
+            android:parentActivityName="com.newsapp.aavaaz.app.secondpage.NewsEntertainment"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.thirdpage.NewsInternationalFull"
+            android:parentActivityName="com.newsapp.aavaaz.app.secondpage.NewsInternational"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.thirdpage.NewsGadgetsFull"
+            android:parentActivityName="com.newsapp.aavaaz.app.secondpage.NewsGadgets"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.thirdpage.NewsLifestyleFull"
+            android:parentActivityName="com.newsapp.aavaaz.app.secondpage.NewsLifestyle"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.thirdpage.NewsPoliticsFull"
+            android:parentActivityName="com.newsapp.aavaaz.app.secondpage.NewsPolitics"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.start.Start1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.start.Start2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.start.Start3"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.newsapp.aavaaz.app.start.Start4"
+            android:screenOrientation="portrait" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+     <activity android:name="com.newsapp.aavaaz.app.Locationout"
+         android:screenOrientation="portrait"
+         android:theme="@style/AppTheme1"/>
+    </application>
+
+</manifest>

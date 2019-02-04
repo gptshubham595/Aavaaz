@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Aavaaz</string>
+    <string name="settings_themes_key" translatable="false">themes</string>
+    <string name="settings_themes_default" translatable="false">@string/settings_themes_dark_value</string>
+    <string name="settings_themes_dark_label">Dark</string>
+    <string name="settings_themes_dark_value">dark</string>
+
+
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="nav">#ffffff</color>
+    <color name="colorPrimary">#37474F</color>
+
+    <color name="colorPrimaryInverse">#00ACC1</color>
+
+    <!--Status Bar Color-->
+    <color name="colorPrimaryDark">#263238</color>
+    <color name="colorPrimaryDarkInverse">#00838F</color>
+
+    <!--Accent Color-->
+    <color name="colorAccent">#ef5350</color>
+    <color name="colorAccentInverse">#ef5350</color>
+
+    <color name="textColor">#ffffff</color>
+
+    <color name="textColorSecondary">#ffffff</color>
+
+    <color name="textColorInverse">#707070</color>
+
+    <color name="textColorSecondaryInverse">#737372</color>
+
+    <color name="dividerColor">#1e000000</color>
+
+    <!--Window Background-->
+
+    <color name="windowBackground">#ffffff</color>
+
+    <!--Windows Background Black -->
+    <color name="black">#222222</color>
+
+</resources>
