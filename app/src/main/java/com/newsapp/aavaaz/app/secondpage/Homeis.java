@@ -101,7 +101,7 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
      //  Toast.makeText(getApplicationContext(),i+"",Toast.LENGTH_SHORT).show();
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = current_user.getUid();
-        DatabaseReference mfirst = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("first");
+        final DatabaseReference mfirst = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("first");
         mfirst.keepSynced(true);
 
         mfirst.addValueEventListener(new ValueEventListener() {
@@ -110,11 +110,14 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){}
-                else{
+                else{ first="no";
                     first = dataSnapshot.getValue(String.class);
-                }
-
-            }
+if(first.equals("yes")){
+    mfirst.setValue("no");
+    Intent a=new Intent(getApplicationContext(),Start1.class);
+    a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivity(a);
+} } }
 
 
             @Override
@@ -209,11 +212,7 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
 
         mAuth=FirebaseAuth.getInstance();
         storageReference= FirebaseStorage.getInstance().getReference();
-        if(first.equals("yes")){
-            mfirst.setValue("no");
-            Intent a=new Intent(getApplicationContext(),Start1.class);
-            startActivity(a);
-        }
+
         geturl(); getsourceurl(); getheading();
         getimage();
         getshortdesc();

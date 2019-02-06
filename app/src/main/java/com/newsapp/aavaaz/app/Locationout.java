@@ -137,7 +137,7 @@ public class Locationout  extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void run() {
                 try{
-                    sleep(4000);
+                    sleep(200);
                 }
                 catch (Exception e){e.printStackTrace();}
                 finally {Intent a=new Intent(getApplicationContext
@@ -174,7 +174,7 @@ public class Locationout  extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void run() {
                 try{
-                    sleep(4000);
+                    sleep(500);
                 }
                 catch (Exception e){e.printStackTrace();}
                 finally {Intent a=new Intent(getApplicationContext
@@ -203,7 +203,7 @@ public class Locationout  extends AppCompatActivity implements OnMapReadyCallbac
                     String current_user_id = mAuth.getCurrentUser().getUid();
                     String deviceToken = FirebaseInstanceId.getInstance().getToken();
                     DatabaseReference mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-                    DatabaseReference mshortdesc = FirebaseDatabase.getInstance().getReference().child("Users").child("first");
+                    DatabaseReference mshortdesc = FirebaseDatabase.getInstance().getReference().child("Users").child(current_user_id).child("first");
                     mshortdesc.keepSynced(true);
 
                     mshortdesc.addValueEventListener(new ValueEventListener() {

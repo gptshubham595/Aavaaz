@@ -29,13 +29,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
             >
         </ImageView>
   
-<VideoView
-android:id="@+id/video"
-android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_marginTop="38dp"
-            android:scaleType="fitXY"
-          />
+
       <TextView
             android:fontFamily="@font/glegoo"
             android:id="@+id/heading"

@@ -28,17 +28,21 @@ import com.newsapp.aavaaz.app.secondpage.NewsPolitics;
 
 import maes.tech.intentanim.CustomIntent;
 
-import static com.newsapp.aavaaz.app.secondpage.NewsSports.SWIPE_THRESHOLD;
-import static com.newsapp.aavaaz.app.secondpage.NewsSports.SWIPE_VELOCITY_THRESHOLD;
-
 
 public class Start1 extends AppCompatActivity implements GestureDetector.OnGestureListener,GestureDetector.OnDoubleTapListener {
 
-    @Override
+    public static final int SWIPE_THRESHOLD = 100;
+    public static final int SWIPE_VELOCITY_THRESHOLD = 100;
+
+   
+private GestureDetector gestureDetector;
+ @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start1);
-        ImageView image=findViewById(R.id.image);
+  
+gestureDetector = new GestureDetector(this);
+ImageView image=findViewById(R.id.image);
 
     }
 
@@ -51,6 +55,11 @@ public class Start1 extends AppCompatActivity implements GestureDetector.OnGestu
     public boolean onDoubleTap(MotionEvent e) {
         Toast.makeText(getApplicationContext(),"Swipe Next ==>",Toast.LENGTH_SHORT).show();
         return true;
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        gestureDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
     }
 
     @Override
@@ -93,9 +102,7 @@ public class Start1 extends AppCompatActivity implements GestureDetector.OnGestu
             if(Math.abs(diffX)>SWIPE_THRESHOLD && Math.abs(velocityX)>SWIPE_VELOCITY_THRESHOLD ){
                 if(diffX>0){onSwipeRight();}
                 else {onSwipeLeft();}
-
             }
-
         }
         else{
             //up or down swipe

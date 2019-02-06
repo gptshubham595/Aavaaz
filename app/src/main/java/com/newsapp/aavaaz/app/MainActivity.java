@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         country = super.getIntent().getExtras().getString("country");
         latitude = super.getIntent().getExtras().getString("lat");
         longitude = super.getIntent().getExtras().getString("lon");
-        Toast.makeText(getApplicationContext(),city,Toast.LENGTH_SHORT).show();;
+        Toast.makeText(getApplicationContext(),city,Toast.LENGTH_SHORT).show();
         mAuth = FirebaseAuth.getInstance();
 
         String id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + "@gmail.com";
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()) {
-                    loginUser(email, password);
+
                     FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
                     String uid = current_user.getUid();
 

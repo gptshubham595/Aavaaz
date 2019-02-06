@@ -111,7 +111,7 @@ public class NewsSports extends AppCompatActivity implements GestureDetector.OnG
         //         i=super.getIntent().getExtras().getInt("i");
         //  Toast.makeText(getApplicationContext(),i+"",Toast.LENGTH_SHORT).show();
 
-		video=findViewById(R.id.video);
+		////video=findViewById(R.id.////video);
 		
         Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
@@ -467,7 +467,7 @@ public class NewsSports extends AppCompatActivity implements GestureDetector.OnG
                                 });
                             }
 							
-							play();
+							//play();
                         }
 
                         @Override
@@ -487,7 +487,9 @@ public class NewsSports extends AppCompatActivity implements GestureDetector.OnG
             }
         });
 
-    }private void play() {
+    }
+	
+	/*private void play() {
 		FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = current_user.getUid();
 
@@ -516,16 +518,16 @@ public class NewsSports extends AppCompatActivity implements GestureDetector.OnG
                             else{url = dataSnapshot.getValue(String.class);
                                 load.setMessage("Loading..");
                                 load.show();
-		MediaController media=new MediaController(NewsSports.this);
-		media.setAnchorView(video);
-		Uri uri=Uri.parse(url);
+		//MediaController media=new MediaController(NewsSports.this);
+		//media.setAnchorView(////video);
+		//Uri uri=Uri.parse(url);
 
-		video.setMediaController(media);
-		video.setVideoURI(uri);
-                                video.seekTo(1);
-		video.requestFocus();
-		video.start();
-         video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+		//video.setMediaController(media);
+		//video.setVideoURI(uri);
+                                //video.seekTo(1);
+		//video.requestFocus();
+		//video.start();
+         //video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                                     @Override
                                     public void onPrepared(MediaPlayer mp) {
                                         load.dismiss();
@@ -549,7 +551,7 @@ public class NewsSports extends AppCompatActivity implements GestureDetector.OnG
 
             }
         });
-	}
+	}*/
     private void getshortdesc() {
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = current_user.getUid();

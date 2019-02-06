@@ -25,11 +25,17 @@ import static com.newsapp.aavaaz.app.secondpage.NewsSports.SWIPE_VELOCITY_THRESH
 
 public class Start2 extends AppCompatActivity implements GestureDetector.OnGestureListener,GestureDetector.OnDoubleTapListener {
 
+    public static final int SWIPE_THRESHOLD = 100;
+    public static final int SWIPE_VELOCITY_THRESHOLD = 100;
+
+private GestureDetector gestureDetector;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start2);
-        ImageView image=findViewById(R.id.image);
+ 
+gestureDetector = new GestureDetector(this);
+ImageView image=findViewById(R.id.image);
         //Glide.with(this).asGif().load(R.drawable.start2is).into(image);
     }    @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {
@@ -45,6 +51,12 @@ public class Start2 extends AppCompatActivity implements GestureDetector.OnGestu
     @Override
     public boolean onDoubleTapEvent(MotionEvent e) {
         return false;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        gestureDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
     }
 
     @Override

@@ -79,6 +79,7 @@ dependencies {
     // Using Relativetimetextview Custom Textview
     implementation 'com.github.curioustechizen.android-ago:library:1.3.4'
 
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.1.17'
     //firebase if used further
     implementation 'com.google.firebase:firebase-storage:11.0.1'
     implementation 'com.google.firebase:firebase-database:11.0.1'

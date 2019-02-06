@@ -4,8 +4,11 @@ import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
@@ -14,26 +17,83 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.newsapp.aavaaz.app.R;
 import com.newsapp.aavaaz.app.secondpage.Homeis;
 
 import maes.tech.intentanim.CustomIntent;
 
+import static com.newsapp.aavaaz.app.MainActivity.city;
+import static com.newsapp.aavaaz.app.activity.SampleActivity.country;
+
+import static com.newsapp.aavaaz.app.activity.SampleActivity.latitude;
+import static com.newsapp.aavaaz.app.activity.SampleActivity.longitude;
+import static com.newsapp.aavaaz.app.activity.SampleActivity.state;
 import static com.newsapp.aavaaz.app.secondpage.NewsSports.SWIPE_THRESHOLD;
 import static com.newsapp.aavaaz.app.secondpage.NewsSports.SWIPE_VELOCITY_THRESHOLD;
 
 
 public class Start4 extends AppCompatActivity implements GestureDetector.OnGestureListener,GestureDetector.OnDoubleTapListener {
 
-    @Override
+    public static final int SWIPE_THRESHOLD = 100;
+    public static final int SWIPE_VELOCITY_THRESHOLD = 100;
+ 
+public static String aid,id;
+   private FirebaseAuth mAuth;
+    private FusedLocationProviderClient mFusedLocationClient;
+    LocationManager locationManager;
+    private LocationCallback mLocationCallback;
+    String pass = "123456789";
+    private GestureDetector gestureDetector;  @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start4);
-        ImageView image=findViewById(R.id.image);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + "@gmail.com";
+        aid = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+gestureDetector = new GestureDetector(this);       ImageView image=findViewById(R.id.image);
       //  Glide.with(this).asGif().load(R.drawable.start1is).into(image);
+
+}
+
+    private void loginUser(final String id, String password) {
+
+        mAuth.signInWithEmailAndPassword(id, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Logged  In", Toast.LENGTH_SHORT).show();
+                    Intent a = new Intent(getApplicationContext(), Homeis.class);
+                    a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(a);
+                    finish();
+
+                } else {
+
+                    //Toast.makeText(getApplicationContext(), "Error : " + task_result, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
     }
 
+  
     @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        gestureDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+
+  @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {
         return false;
     }
@@ -108,10 +168,11 @@ public class Start4 extends AppCompatActivity implements GestureDetector.OnGestu
 
     }
 
-
     private void onSwipeLeft() {
         ////Toast.makeText(getApplicationContext(),"Right swipe",//Toast.LENGTH_SHORT).show();
-        Intent a=new Intent(getApplicationContext(),Homeis.class);
+       String password="123456789";
+       loginUser(id,password);
+ Intent a=new Intent(getApplicationContext(),Homeis.class);
         a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
         CustomIntent.customType(this,"left-to-right");
 
