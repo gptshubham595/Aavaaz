@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +26,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.newsapp.aavaaz.app.R;
 import com.newsapp.aavaaz.app.secondpage.Homeis;
+
+
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import maes.tech.intentanim.CustomIntent;
 
@@ -58,8 +64,10 @@ public static String aid,id;
 
         id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + "@gmail.com";
         aid = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-gestureDetector = new GestureDetector(this);       ImageView image=findViewById(R.id.image);
-      //  Glide.with(this).asGif().load(R.drawable.start1is).into(image);
+gestureDetector = new GestureDetector(this);
+
+      //  ImageView image =findViewById(R.id.image);
+     //   Glide.with(this).asGif().load(R.drawable.start1is).into(image);
 
 }
 

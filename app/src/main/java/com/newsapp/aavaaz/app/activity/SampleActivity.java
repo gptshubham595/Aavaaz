@@ -65,12 +65,12 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
     LocationManager locationManager;
     private LocationCallback mLocationCallback;
     String pass = "123456789";
-    public static String city = "1", state = "1", country = "1", longitude = "1", latitude = "1",id,aid;
+    public static String city = "1", state = "1", country = "1", longitude = "1", latitude = "1", id, aid;
     private ProgressDialog progressDialog;
     TextView locationText;
     public static String location;
     private SamplePresenter samplePresenter;
-    private DatabaseReference mDatabase,mi;
+    private DatabaseReference mDatabase, mi;
     Thread a;
 
     @Override
@@ -83,14 +83,15 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
 
         mAuth = FirebaseAuth.getInstance();
 
-         id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + "@gmail.com";
-         aid = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + "@gmail.com";
+        aid = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 Log.d("mylog", "Not granted");
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            } else
-            {requestLocation();}
+            } else {
+                requestLocation();
+            }
 
         }
 
@@ -117,7 +118,7 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
 
     }
 
-    private void register_user(final String display_name, final String email, final String password, final String lat,final String lon,final String city,final String state,final String country) {
+    private void register_user(final String display_name, final String email, final String password, final String lat, final String lon, final String city, final String state, final String country) {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -133,7 +134,7 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
 
                     HashMap<String, String> userMap = new HashMap<>();
                     userMap.put("name", display_name);
-                    userMap.put("first","yes");
+                    userMap.put("first", "yes");
                     userMap.put("city", city);
                     userMap.put("state", state);
                     userMap.put("country", country);
@@ -149,8 +150,8 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
                                 //Toast.makeText(getApplicationContext(), "Registered!!", Toast.LENGTH_LONG).show();
                                 mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("first");
                                 mi.setValue("no");
-                                Intent a=new Intent(getApplicationContext(),Start1.class);
-                                a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                Intent a = new Intent(getApplicationContext(), Start1.class);
+                                a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(a);
 
 
@@ -178,7 +179,9 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
                             if (task.isSuccessful()) {
                                 //Toast.makeText(getApplicationContext(), "Registered!!", Toast.LENGTH_LONG).show();
                                 finish();
-                                } }});
+                            }
+                        }
+                    });
 
                 } else {
                     //Toast.makeText(getApplicationContext(), "Sorry.", Toast.LENGTH_LONG).show();
@@ -201,7 +204,7 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
                     finish();
 
                 } else {
-                    register_user(aid, id, pass, latitude,longitude,city,state,country);
+                    register_user(aid, id, pass, latitude, longitude, city, state, country);
 
                     //Toast.makeText(getApplicationContext(), "Error : " + task_result, Toast.LENGTH_LONG).show();
                 }
@@ -262,6 +265,16 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
         criteria.setAccuracy(Criteria.ACCURACY_MEDIUM);
         criteria.setPowerRequirement(Criteria.POWER_MEDIUM);
         String provider = locationManager.getBestProvider(criteria, true);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         Location location = locationManager.getLastKnownLocation(provider);
         Log.d("mylog", "In Requesting Location");
         if (location != null && (System.currentTimeMillis() - location.getTime()) <= 1000 * 2) {

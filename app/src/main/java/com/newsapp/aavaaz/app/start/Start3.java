@@ -17,6 +17,11 @@ import com.bumptech.glide.Glide;
 import com.newsapp.aavaaz.app.R;
 import com.newsapp.aavaaz.app.secondpage.Homeis;
 
+
+
+import java.io.IOException;
+import java.io.InputStream;
+
 import maes.tech.intentanim.CustomIntent;
 
 import static com.newsapp.aavaaz.app.secondpage.NewsSports.SWIPE_THRESHOLD;
@@ -34,7 +39,8 @@ private GestureDetector gestureDetector;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start3);
  
-gestureDetector = new GestureDetector(this);       ImageView image=findViewById(R.id.image);
+gestureDetector = new GestureDetector(this);
+
        // Glide.with(this).asGif().load(R.drawable.start3is).into(image);
     }
 

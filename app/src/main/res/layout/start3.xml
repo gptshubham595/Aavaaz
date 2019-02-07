@@ -8,13 +8,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <pl.droidsonroids.gif.GifImageView
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/start"
             android:id="@+id/image"
             android:background="@android:color/black"
-            android:src="@drawable/start3is"/>
+            android:src="@drawable/start2is"/>
 
         <ImageView
             android:layout_width="match_parent"
