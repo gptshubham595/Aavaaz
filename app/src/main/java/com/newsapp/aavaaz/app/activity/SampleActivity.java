@@ -82,11 +82,11 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
 
         locationText = (TextView) findViewById(R.id.locationText);
         samplePresenter = new SamplePresenter(this);
-
+        String id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + "@gmail.com";
+        String pass="123456789";
         mAuth = FirebaseAuth.getInstance();
 
-        getLocation();
-        
+     loginUser(id,pass);
     }
 
     private void loginUser(final String id, String password) {
@@ -96,7 +96,7 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     //Toast.makeText(getApplicationContext(), "Logged  In", Toast.LENGTH_SHORT).show();
-                    Intent a = new Intent(getApplicationContext(), Locationout.class);
+                    Intent a = new Intent(getApplicationContext(), Homeis.class);
                     a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(a);
                     CustomIntent.customType(SampleActivity.this,"fadein-to-fadeout");
@@ -104,23 +104,6 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
 
                 } else {
                     getLocation();
-
-                    a=new Thread(){
-                        @Override
-                        public void run() {
-                            try{
-                                sleep(3000);
-                            }
-                            catch (Exception e){e.printStackTrace();}
-                            finally {
-                                Intent a=new Intent(getApplicationContext(),Locationout.class);
-                                startActivity(a);
-                                CustomIntent.customType(SampleActivity.this,"fadein-to-fadeout");
-                            }
-                        }
-                    };
-                    a.start();
-
                     //register_user(aid, id, pass, latitude, longitude, city, state, country);
 
                     //Toast.makeText(getApplicationContext(), "Error : " + task_result, Toast.LENGTH_LONG).show();
@@ -132,25 +115,28 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
     }
 
 
+private void go(){
+    a=new Thread(){
+        @Override
+        public void run() {
+            try{
+                sleep(200);
+            }
+            catch (Exception e){e.printStackTrace();}
+            finally {
+                Intent a=new Intent(getApplicationContext(),Locationout.class);
+                startActivity(a);
+                CustomIntent.customType(SampleActivity.this,"fadein-to-fadeout");
+            }
+        }
+    };
+    a.start();
 
+}
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        a=new Thread(){
-                        @Override
-                        public void run() {
-                            try{
-                                sleep(200);
-                            }
-                            catch (Exception e){e.printStackTrace();}
-                            finally {
-                                Intent a=new Intent(getApplicationContext(),Locationout.class);
-                                startActivity(a);
-                                CustomIntent.customType(SampleActivity.this,"fadein-to-fadeout");
-                            }
-                        }
-                    };
-                    a.start();
+        go();
         samplePresenter.destroy();
     }
 
@@ -224,22 +210,7 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
     public void dismissProgress() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
-                    a=new Thread(){
-                        @Override
-                        public void run() {
-                            try{
-                                sleep(200);
-                            }
-                            catch (Exception e){e.printStackTrace();}
-                            finally {
-                                Intent a=new Intent(getApplicationContext(),Locationout.class);
-                                startActivity(a);
-                                CustomIntent.customType(SampleActivity.this,"fadein-to-fadeout");
-                            }
-                        }
-                    };
-                    a.start();
-
+             go();
         }
     }
 

@@ -308,7 +308,7 @@ public class NewsGadgets extends AppCompatActivity implements GestureDetector.On
         catch(IOException e){}
     }
     public void shareit(){
-        Uri path=FileProvider.getUriForFile(getBaseContext(),"com.yayandroid.locationmanager.sample",imagepath);
+        Uri path=FileProvider.getUriForFile(getBaseContext(),"com.newsapp.aavaaz.app",imagepath);
         Intent share=new Intent();
         share.setAction(Intent.ACTION_SEND);
         share.putExtra(Intent.EXTRA_TEXT,heading.getText());
