@@ -64,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 .getBoolean("isFirstRun", true);
 
         loginUser(id,pass);
-        //heading.setText(location);
-//Intent a=new Intent(getApplicationContext(),NewsSports.class);startActivity(a);
 
     }
 
