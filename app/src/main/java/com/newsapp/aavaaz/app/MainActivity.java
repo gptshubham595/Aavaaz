@@ -58,85 +58,16 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         String id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + "@gmail.com";
-        String aid = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        aid = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
         Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
-
-        register_user(aid, id, pass, latitude,longitude,city,state,country);
 
         loginUser(id,pass);
         //heading.setText(location);
 //Intent a=new Intent(getApplicationContext(),NewsSports.class);startActivity(a);
 
     }
-    //=========================
-    /*private void register_user1(final String display_name, final String email, final String password) {
-
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                if (task.isSuccessful()) {
-                    loginUser(email, password);
-                    FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
-                    String uid = current_user.getUid();
-
-                    mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
-
-                    String device_token = FirebaseInstanceId.getInstance().getToken();
-
-                    HashMap<String, String> userMap = new HashMap<>();
-                    userMap.put("name", display_name);
-                    userMap.put("device_token", device_token);
-
-
-                    mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                //Toast.makeText(getApplicationContext(), "Registered!!", Toast.LENGTH_LONG).show();
-                                finish();
-
-                            }
-
-                        }
-                    });
-                    mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last");
-                    HashMap<String, String> userMap1 = new HashMap<>();
-                    userMap1.put("Sports", "1");
-                    userMap1.put("Politics", "1");
-                    userMap1.put("Agriculture", "1");
-                    userMap1.put("Business", "1");
-                    userMap1.put("Education", "1");
-                    userMap1.put("Entertainment", "1");
-                    userMap1.put("Gadgets", "1");
-                    userMap1.put("International", "1");
-                    userMap1.put("Lifestyle", "1");
-
-                    mi.setValue(userMap1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                //Toast.makeText(getApplicationContext(), "Registered!!", Toast.LENGTH_LONG).show();
-                                finish();
-
-                            }
-
-                        }
-                    });
-
-                } else {
-
-
-                    //Toast.makeText(getApplicationContext(), "Sorry", Toast.LENGTH_LONG).show();
-
-                }
-
-            }
-        });
-
-    }*/
 
     private void register_user(final String display_name, final String email, final String password, final String lat,final String lon,final String city,final String state,final String country) {
 
@@ -193,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 //Toast.makeText(getApplicationContext(), "Registered!!", Toast.LENGTH_LONG).show();
+                                Intent a=new Intent(getApplicationContext(),Start1.class);
+                                startActivity(a);
+                                CustomIntent.customType(MainActivity.this,"fadein-to-fadeout");
                                 finish();
 
                             }
@@ -209,10 +143,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-loginUser(email,password);
     }
 
-    private void loginUser(String id, String password) {
+    private void loginUser(final String id, String password) {
 
         mAuth.signInWithEmailAndPassword(id, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -241,6 +174,8 @@ loginUser(email,password);
                         @Override
                         public void onCancelled(DatabaseError error) {
                             // Failed to read value
+                            register_user(aid, id, pass, latitude,longitude,city,state,country);
+
 
                         }
                     });
@@ -251,6 +186,7 @@ loginUser(email,password);
                             Intent a=new Intent(getApplicationContext(),Homeis.class);
                             a.putExtra("first",first);
                             startActivity(a);
+                            CustomIntent.customType(MainActivity.this,"fadein-to-fadeout");
                             finish();
                         }
                     });

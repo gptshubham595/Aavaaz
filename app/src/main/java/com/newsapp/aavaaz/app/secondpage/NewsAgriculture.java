@@ -157,7 +157,7 @@ public class NewsAgriculture extends AppCompatActivity implements GestureDetecto
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bitmap=takescreen();
+                ActivityCompat.requestPermissions(NewsAgriculture.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);    Bitmap bitmap=takescreen();
                 saveBitmap(bitmap);
                 shareit();
             }

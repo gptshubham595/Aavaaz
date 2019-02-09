@@ -2,6 +2,7 @@ package com.newsapp.aavaaz.app.activity;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -40,6 +41,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.newsapp.aavaaz.app.MainActivity;
+import com.newsapp.aavaaz.app.MainActivity2;
 import com.newsapp.aavaaz.app.secondpage.Homeis;
 import com.newsapp.aavaaz.app.start.Start1;
 import com.newsapp.aavaaz.base.LocationBaseActivity;
@@ -83,112 +85,8 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
 
         mAuth = FirebaseAuth.getInstance();
 
-        id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + "@gmail.com";
-        aid = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                Log.d("mylog", "Not granted");
-                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            } else {
-                requestLocation();
-            }
-
-        }
-
-
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        mLocationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                super.onLocationResult(locationResult);
-                requestLocation();
-                Location mCurrentLocation = locationResult.getLastLocation();
-                LatLng myCoordinates = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
-
-                city = getCityName(myCoordinates);
-                latitude = mCurrentLocation.getLatitude() + "";
-                longitude = mCurrentLocation.getLongitude() + "";
-                state = getStateName(myCoordinates);
-                country = getCountryName(myCoordinates);
-
-            }
-        };
         getLocation();
-
-
-    }
-
-    private void register_user(final String display_name, final String email, final String password, final String lat, final String lon, final String city, final String state, final String country) {
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                if (task.isSuccessful()) {
-
-                    FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
-                    final String uid = current_user.getUid();
-
-                    mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
-
-                    String device_token = FirebaseInstanceId.getInstance().getToken();
-
-                    HashMap<String, String> userMap = new HashMap<>();
-                    userMap.put("name", display_name);
-                    userMap.put("first", "yes");
-                    userMap.put("city", city);
-                    userMap.put("state", state);
-                    userMap.put("country", country);
-                    userMap.put("longitude", lon);
-                    userMap.put("latitude", lat);
-                    userMap.put("latitude", lat);
-                    userMap.put("device_token", device_token);
-
-                    mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                //Toast.makeText(getApplicationContext(), "Registered!!", Toast.LENGTH_LONG).show();
-                                mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("first");
-                                mi.setValue("no");
-                                Intent a = new Intent(getApplicationContext(), Start1.class);
-                                a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(a);
-
-
-                            }
-
-                        }
-                    });
-
-                    mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last");
-                    HashMap<String, String> userMap1 = new HashMap<>();
-                    userMap1.put("Sports", "1");
-                    userMap1.put("Politics", "1");
-                    userMap1.put("Agriculture", "1");
-                    userMap1.put("Business", "1");
-                    userMap1.put("Education", "1");
-                    userMap1.put("Entertainment", "1");
-                    userMap1.put("Homeis", "1");
-                    userMap1.put("Gadgets", "1");
-                    userMap1.put("International", "1");
-                    userMap1.put("Lifestyle", "1");
-
-                    mi.setValue(userMap1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                //Toast.makeText(getApplicationContext(), "Registered!!", Toast.LENGTH_LONG).show();
-                                finish();
-                            }
-                        }
-                    });
-
-                } else {
-                    //Toast.makeText(getApplicationContext(), "Sorry.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
+        
     }
 
     private void loginUser(final String id, String password) {
@@ -197,14 +95,33 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), "Logged  In", Toast.LENGTH_SHORT).show();
-                    Intent a = new Intent(getApplicationContext(), Homeis.class);
+                    //Toast.makeText(getApplicationContext(), "Logged  In", Toast.LENGTH_SHORT).show();
+                    Intent a = new Intent(getApplicationContext(), Locationout.class);
                     a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(a);
-                    finish();
+                    CustomIntent.customType(SampleActivity.this,"fadein-to-fadeout");
+                  
 
                 } else {
-                    register_user(aid, id, pass, latitude, longitude, city, state, country);
+                    getLocation();
+
+                    a=new Thread(){
+                        @Override
+                        public void run() {
+                            try{
+                                sleep(3000);
+                            }
+                            catch (Exception e){e.printStackTrace();}
+                            finally {
+                                Intent a=new Intent(getApplicationContext(),Locationout.class);
+                                startActivity(a);
+                                CustomIntent.customType(SampleActivity.this,"fadein-to-fadeout");
+                            }
+                        }
+                    };
+                    a.start();
+
+                    //register_user(aid, id, pass, latitude, longitude, city, state, country);
 
                     //Toast.makeText(getApplicationContext(), "Error : " + task_result, Toast.LENGTH_LONG).show();
                 }
@@ -214,88 +131,26 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
 
     }
 
-    private String getCityName(LatLng myCoordinates) {
-        String myCity = "";
-        Geocoder geocoder = new Geocoder(SampleActivity.this, Locale.getDefault());
-        try {
-            List<Address> addresses = geocoder.getFromLocation(myCoordinates.latitude, myCoordinates.longitude, 1);
-            String address = addresses.get(0).getAddressLine(0);
-            myCity = addresses.get(0).getLocality();
-            Log.d("mylog", "Complete Address: " + addresses.toString());
-            Log.d("mylog", "Address: " + address);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return myCity;
-    }
-
-    private String getStateName(LatLng myCoordinates) {
-        String myCity = "";
-        Geocoder geocoder = new Geocoder(SampleActivity.this, Locale.getDefault());
-        try {
-            List<Address> addresses = geocoder.getFromLocation(myCoordinates.latitude, myCoordinates.longitude, 1);
-            String address = addresses.get(0).getAddressLine(0);
-            myCity = addresses.get(0).getAdminArea();
-            Log.d("mylog", "Complete Address: " + addresses.toString());
-            Log.d("mylog", "Address: " + address);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return myCity;
-    }
-
-    private String getCountryName(LatLng myCoordinates) {
-        String myCity = "";
-        Geocoder geocoder = new Geocoder(SampleActivity.this, Locale.getDefault());
-        try {
-            List<Address> addresses = geocoder.getFromLocation(myCoordinates.latitude, myCoordinates.longitude, 1);
-            String address = addresses.get(0).getAddressLine(0);
-            myCity = addresses.get(0).getCountryName();
-            Log.d("mylog", "Complete Address: " + addresses.toString());
-            Log.d("mylog", "Address: " + address);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return myCity;
-    }
 
 
-    private void requestLocation() {
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_MEDIUM);
-        criteria.setPowerRequirement(Criteria.POWER_MEDIUM);
-        String provider = locationManager.getBestProvider(criteria, true);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        Location location = locationManager.getLastKnownLocation(provider);
-        Log.d("mylog", "In Requesting Location");
-        if (location != null && (System.currentTimeMillis() - location.getTime()) <= 1000 * 2) {
-            LatLng myCoordinates = new LatLng(location.getLatitude(), location.getLongitude());
-            city = getCityName(myCoordinates);
-            //Toast.makeText(this, cityName, Toast.LENGTH_SHORT).show();
-        } else {
-            LocationRequest locationRequest = new LocationRequest();
-            locationRequest.setNumUpdates(1);
-            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-            Log.d("mylog", "Last location too old getting new location!");
-            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-            mFusedLocationClient.requestLocationUpdates(locationRequest,
-                    mLocationCallback, Looper.myLooper());
-        }
-    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        loginUser(id, pass);
-
+        a=new Thread(){
+                        @Override
+                        public void run() {
+                            try{
+                                sleep(200);
+                            }
+                            catch (Exception e){e.printStackTrace();}
+                            finally {
+                                Intent a=new Intent(getApplicationContext(),Locationout.class);
+                                startActivity(a);
+                                CustomIntent.customType(SampleActivity.this,"fadein-to-fadeout");
+                            }
+                        }
+                    };
+                    a.start();
         samplePresenter.destroy();
     }
 
@@ -369,7 +224,21 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
     public void dismissProgress() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
-            loginUser(id, pass);
+                    a=new Thread(){
+                        @Override
+                        public void run() {
+                            try{
+                                sleep(200);
+                            }
+                            catch (Exception e){e.printStackTrace();}
+                            finally {
+                                Intent a=new Intent(getApplicationContext(),Locationout.class);
+                                startActivity(a);
+                                CustomIntent.customType(SampleActivity.this,"fadein-to-fadeout");
+                            }
+                        }
+                    };
+                    a.start();
 
         }
     }

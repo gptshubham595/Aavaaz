@@ -154,7 +154,7 @@ public class NewsPolitics extends AppCompatActivity implements GestureDetector.O
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bitmap=takescreen();
+                ActivityCompat.requestPermissions(NewsPolitics.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);    Bitmap bitmap=takescreen();
                 saveBitmap(bitmap);
                 shareit();
             }
@@ -1051,13 +1051,13 @@ public class NewsPolitics extends AppCompatActivity implements GestureDetector.O
         });
     }
     private void onSwipeTop() {
-        Intent a=new Intent(getApplicationContext(),NewsInternational.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
+        Intent a=new Intent(getApplicationContext(),Homeis.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
         //overridePendingTransition(R.anim.slideintop,R.anim.slideoutdown);
         CustomIntent.customType(this,"bottom-to-up");
     }
     private void onSwipeBottom() {
         ////Toast.makeText(getApplicationContext(),"Top swipe",//Toast.LENGTH_SHORT).show();
-        Intent a=new Intent(getApplicationContext(),NewsSports.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
+        Intent a=new Intent(getApplicationContext(),NewsBusiness.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
         //overridePendingTransition(R.anim.slideintop,R.anim.slideoutdown);
         CustomIntent.customType(this,"up-to-bottom");
     }

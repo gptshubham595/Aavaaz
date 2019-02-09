@@ -155,7 +155,7 @@ public class NewsEntertainment extends AppCompatActivity implements GestureDetec
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bitmap=takescreen();
+                ActivityCompat.requestPermissions(NewsEntertainment.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);    Bitmap bitmap=takescreen();
                 saveBitmap(bitmap);
                 shareit();
             }

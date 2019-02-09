@@ -160,6 +160,7 @@ alluserlist=(RecyclerView) findViewById(R.id.recycler);
                     Picasso.get().load(image1).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.slide1).into(trendingimage, new Callback() {
                         @Override
                         public void onSuccess() {
+							loadtext();
                         }
                         @Override
                         public void onError(Exception e) {
@@ -173,6 +174,7 @@ alluserlist=(RecyclerView) findViewById(R.id.recycler);
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
+				loadtext();
             }
         });}
     private void getheading() {
@@ -199,6 +201,7 @@ alluserlist=(RecyclerView) findViewById(R.id.recycler);
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
+				loadtext();
             }
         });
         }

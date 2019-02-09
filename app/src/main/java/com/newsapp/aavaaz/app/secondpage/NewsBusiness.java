@@ -153,7 +153,7 @@ public class NewsBusiness extends AppCompatActivity implements GestureDetector.O
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bitmap=takescreen();
+                ActivityCompat.requestPermissions(NewsBusiness.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);    Bitmap bitmap=takescreen();
                 saveBitmap(bitmap);
                 shareit();
             }

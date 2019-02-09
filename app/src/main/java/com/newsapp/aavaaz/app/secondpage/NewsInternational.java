@@ -1,5 +1,4 @@
-package com.newsapp.aavaaz.app
-.secondpage;
+package com.newsapp.aavaaz.app.secondpage;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -153,7 +152,7 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bitmap=takescreen();
+                ActivityCompat.requestPermissions(NewsInternational.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);    Bitmap bitmap=takescreen();
                 saveBitmap(bitmap);
                 shareit();
             }

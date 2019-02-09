@@ -87,7 +87,7 @@ public class Locationout  extends AppCompatActivity implements OnMapReadyCallbac
 
         String id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + "@gmail.com";
         String aid = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        loginUser(id,pass);
+     //   loginUser(id,pass);
 
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -225,7 +225,7 @@ public class Locationout  extends AppCompatActivity implements OnMapReadyCallbac
                                                 Intent a=new Intent(getApplicationContext(),Start1.class);
                                                 a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(a);
-
+                                                CustomIntent.customType(Locationout.this,"fadein-to-fadeout");
                                             }}
                                     }
                                 };
@@ -249,6 +249,7 @@ public class Locationout  extends AppCompatActivity implements OnMapReadyCallbac
                             Intent a=new Intent(getApplicationContext(),Homeis.class);
                             a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(a);
+                            CustomIntent.customType(Locationout.this,"fadein-to-fadeout");
                             finish();
                         }
                     });

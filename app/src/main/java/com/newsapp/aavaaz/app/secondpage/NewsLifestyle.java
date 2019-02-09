@@ -153,7 +153,7 @@ public class NewsLifestyle extends AppCompatActivity implements GestureDetector.
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bitmap=takescreen();
+                ActivityCompat.requestPermissions(NewsLifestyle.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);    Bitmap bitmap=takescreen();
                 saveBitmap(bitmap);
                 shareit();
             }
@@ -1050,7 +1050,7 @@ public class NewsLifestyle extends AppCompatActivity implements GestureDetector.
         });
     }
     private void onSwipeTop() {
-        Intent a=new Intent(getApplicationContext(),NewsSports.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
+        Intent a=new Intent(getApplicationContext(),NewsEntertainment.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
         //overridePendingTransition(R.anim.slideintop,R.anim.slideoutdown);
         CustomIntent.customType(this,"bottom-to-up");
     }
