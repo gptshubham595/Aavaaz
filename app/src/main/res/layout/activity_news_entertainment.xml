@@ -52,31 +52,36 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
             android:backgroundTint="#fafafa"
             android:background="@drawable/shape"
             android:text=" "            android:textSize="15dp" />
+<RelativeLayout
+        android:layout_width="wrap_content"
+		android:layout_below="@id/desc"
+		android:background="@drawable/shape6"
+        android:layout_height="wrap_content">
 <TextView
-        android:layout_width="match_parent"
+   android:textColor="#ffffff"
+       android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-
+	
     android:id="@+id/newis"
         android:layout_marginLeft="5dp"
     android:fontFamily="@font/glegoo"
-	android:background="@drawable/shape"
         android:text="Read More"
-    android:layout_below="@id/desc"
+    
         />
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@id/newis"
-	android:background="@drawable/shape"
-    android:textSize="17sp"
 
+    android:textSize="17sp"
+	
     android:layout_marginLeft="5dp"
     android:text=""
     android:fontFamily="@font/glegoo"
     android:textColor="#000095"
     android:id="@+id/urllink"
-    />        <Button
+    />   </RelativeLayout>    <Button
             android:id="@+id/up"
             android:layout_width="50dp"
             android:layout_height="50dp"

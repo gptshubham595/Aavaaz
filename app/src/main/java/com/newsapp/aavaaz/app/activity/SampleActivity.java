@@ -85,7 +85,7 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
         String id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + "@gmail.com";
         String pass="123456789";
         mAuth = FirebaseAuth.getInstance();
-
+        getLocation();
      loginUser(id,pass);
     }
 
