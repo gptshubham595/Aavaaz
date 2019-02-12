@@ -227,6 +227,7 @@
         android:id="@+id/text"
         android:text="Trending News Here"
         android:layout_margin="10dp"
+        android:textSize="24sp"
         android:textStyle="bold"/>
 
     <android.support.v7.widget.RecyclerView

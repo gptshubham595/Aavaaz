@@ -1053,13 +1053,15 @@ public class NewsGadgets extends AppCompatActivity implements GestureDetector.On
         });
     }
     private void onSwipeTop() {
-        Intent a=new Intent(getApplicationContext(),NewsLifestyle.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
+        Intent a=new Intent(getApplicationContext(),NewsAgriculture.class);  
+		a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
         //overridePendingTransition(R.anim.slideintop,R.anim.slideoutdown);
         CustomIntent.customType(this,"bottom-to-up");
     }
     private void onSwipeBottom() {
-        ////Toast.makeText(getApplicationContext(),"Top swipe",//Toast.LENGTH_SHORT).show();
-        Intent a=new Intent(getApplicationContext(),NewsAgriculture.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
+        Intent a=new Intent(getApplicationContext(),NewsLifestyle.class);    
+		/////Toast.makeText(getApplicationContext(),"Top swipe",//Toast.LENGTH_SHORT).show();
+          a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
         //overridePendingTransition(R.anim.slideintop,R.anim.slideoutdown);
         CustomIntent.customType(this,"up-to-bottom");
     }
