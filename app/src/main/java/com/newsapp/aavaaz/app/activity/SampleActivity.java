@@ -62,67 +62,53 @@ import java.util.Locale;
 import maes.tech.intentanim.CustomIntent;
 
 public class SampleActivity extends LocationBaseActivity implements SampleView {
-    private FirebaseAuth mAuth;
-    private FusedLocationProviderClient mFusedLocationClient;
-    LocationManager locationManager;
-    private LocationCallback mLocationCallback;
-    String pass = "123456789";
-    public static String city = "1", state = "1", country = "1", longitude = "1", latitude = "1", id, aid;
+
     private ProgressDialog progressDialog;
+	private DatabaseReference mDatabase,mi,usersref;
+    private FirebaseAuth mAuth;
     TextView locationText;
+	String pass = "123456789",aid;
     public static String location;
     private SamplePresenter samplePresenter;
-    private DatabaseReference mDatabase, mi;
     Thread a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.location_display_layout);
-
+		mAuth = FirebaseAuth.getInstance();
         locationText = (TextView) findViewById(R.id.locationText);
-        samplePresenter = new SamplePresenter(this);
-        String id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + "@gmail.com";
-        String pass="123456789";
-        mAuth = FirebaseAuth.getInstance();
-        getLocation();
-     loginUser(id,pass);
-    }
+		String id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + "@gmail.com";
+        aid = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+    
+		samplePresenter = new SamplePresenter(this);
+        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("isFirstRun", true);
+		
+		loginUser(id,pass);
+        
+        }
 
-    private void loginUser(final String id, String password) {
+private void loginUser(final String id, String password) {
 
         mAuth.signInWithEmailAndPassword(id, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    //Toast.makeText(getApplicationContext(), "Logged  In", Toast.LENGTH_SHORT).show();
-                    Intent a = new Intent(getApplicationContext(), Homeis.class);
-                    a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(a);
-                    CustomIntent.customType(SampleActivity.this,"fadein-to-fadeout");
-                  
-
-                } else {
-                    getLocation();
-                    //register_user(aid, id, pass, latitude, longitude, city, state, country);
-
-                    //Toast.makeText(getApplicationContext(), "Error : " + task_result, Toast.LENGTH_LONG).show();
-                }
+           if(task.isSuccessful()){
+               go2();
+           }
+           else{getLocation(); 
+           }
             }
         });
-
-
     }
-
-
 private void go(){
     a=new Thread(){
         @Override
         public void run() {
             try{
-                sleep(200);
-            }
-            catch (Exception e){e.printStackTrace();}
+                 sleep(300);
+            }catch (Exception e){e.printStackTrace();}
             finally {
                 Intent a=new Intent(getApplicationContext(),Locationout.class);
                 startActivity(a);
@@ -133,6 +119,27 @@ private void go(){
     a.start();
 
 }
+
+
+private void go2(){
+    a=new Thread(){
+        @Override
+        public void run() {
+            try{
+                sleep(60);
+            }catch (Exception e){e.printStackTrace();}
+            finally {
+                Intent a=new Intent(getApplicationContext(),Locationout.class);
+                startActivity(a);
+                CustomIntent.customType(SampleActivity.this,"fadein-to-fadeout");
+            }
+        }
+    };
+    a.start();
+
+}
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -153,7 +160,7 @@ private void go(){
     @Override
     public void onLocationFailed(@FailType int failType) {
         samplePresenter.onLocationFailed(failType);
-		
+
     }
 
     @Override
@@ -210,7 +217,7 @@ private void go(){
     public void dismissProgress() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
-             go();
+            go();
         }
     }
 
