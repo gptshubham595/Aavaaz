@@ -85,9 +85,6 @@ public class Locationout  extends AppCompatActivity implements OnMapReadyCallbac
 
         mAuth = FirebaseAuth.getInstance();
 
-        String id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + "@gmail.com";
-        String aid = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-     //   loginUser(id,pass);
 
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -106,12 +103,6 @@ public class Locationout  extends AppCompatActivity implements OnMapReadyCallbac
                  countryName = getCountryName(myCoordinates);
 
 
-          //      Toast.makeText(getApplicationContext(), latitude, Toast.LENGTH_SHORT).show();
-            //    Toast.makeText(getApplicationContext(), longitude, Toast.LENGTH_SHORT).show();
-              //  Toast.makeText(getApplicationContext(), cityName, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(getApplicationContext(), stateName, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(getApplicationContext(), countryName, Toast.LENGTH_SHORT).show();
-
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myCoordinates, 13.0f));
                 if (marker == null) {
                     marker = mMap.addMarker(new MarkerOptions().position(myCoordinates));
@@ -120,11 +111,6 @@ public class Locationout  extends AppCompatActivity implements OnMapReadyCallbac
             }
         };
         btnButton = findViewById(R.id.btnCurrentCity);
-                //Toast.makeText(getApplicationContext(), latitude, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(getApplicationContext(), longitude, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(getApplicationContext(), cityName, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(getApplicationContext(), stateName, Toast.LENGTH_SHORT).show();
-//                Toast.makeText(getApplicationContext(), countryName, Toast.LENGTH_SHORT).show();
 
                 if (Build.VERSION.SDK_INT >= 23) {
                     if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -132,31 +118,11 @@ public class Locationout  extends AppCompatActivity implements OnMapReadyCallbac
                         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                     } else
                         requestLocation();
-    Thread a;
-        a=new Thread(){
-            @Override
-            public void run() {
-                try{
-                    sleep(200);
-                }
-                catch (Exception e){e.printStackTrace();}
-                finally {Intent a=new Intent(getApplicationContext
-                            (),MainActivity.class);
-                    a.putExtra("city",cityName);
-                    a.putExtra("state",stateName);
-                    a.putExtra("country",countryName);
-                    a.putExtra("lat",latitude);
-                    a.putExtra("lon",longitude);
-                    a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(a);
-                    CustomIntent.customType(Locationout.this,"fadein-to-fadeout");
-                }
-            }
-        };
-        a.start();
+    go();
 
                 } else
                 {requestLocation();
+                go();
                 }
 
 
@@ -167,18 +133,22 @@ public class Locationout  extends AppCompatActivity implements OnMapReadyCallbac
                 Log.d("mylog", "Not granted");
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             } else
-            {requestLocation();
+            {requestLocation(); go();
 }
         } else
-        {requestLocation();      Thread  a=new Thread(){
+        {requestLocation(); go(); } }
+
+    private void go() {
+        Thread a;
+        a=new Thread(){
             @Override
             public void run() {
                 try{
-                    sleep(500);
+                    sleep(800);
                 }
                 catch (Exception e){e.printStackTrace();}
                 finally {Intent a=new Intent(getApplicationContext
-                            (),MainActivity.class);
+                        (),MainActivity.class);
                     a.putExtra("city",cityName);
                     a.putExtra("state",stateName);
                     a.putExtra("country",countryName);
@@ -191,76 +161,6 @@ public class Locationout  extends AppCompatActivity implements OnMapReadyCallbac
             }
         };
         a.start();
-}
-    }
-    private void loginUser(String id, String password) {
-
-        mAuth.signInWithEmailAndPassword(id, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), "Logged 1st step", Toast.LENGTH_SHORT).show();
-                    String current_user_id = mAuth.getCurrentUser().getUid();
-                    String deviceToken = FirebaseInstanceId.getInstance().getToken();
-                    DatabaseReference mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-                    DatabaseReference mshortdesc = FirebaseDatabase.getInstance().getReference().child("Users").child(current_user_id).child("first");
-                    mshortdesc.keepSynced(true);
-
-                    mshortdesc.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            // This method is called once with the initial value and again
-                            // whenever data at this location is updated.
-                            if(!dataSnapshot.exists()){}
-                            else{
-                                final String value = dataSnapshot.getValue(String.class);
-                                Thread a=new Thread(){
-                                    @Override
-                                    public void run() {
-                                        try{
-                                            sleep(500);
-                                        }catch (Exception e){e.printStackTrace();}
-                                        finally {
-                                            if(value.equals("yes")){
-                                                Intent a=new Intent(getApplicationContext(),Start1.class);
-                                                a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                startActivity(a);
-                                                CustomIntent.customType(Locationout.this,"fadein-to-fadeout");
-                                            }}
-                                    }
-                                };
-                                a.start();
-
-                            }
-
-                        }
-
-
-                        @Override
-                        public void onCancelled(DatabaseError error) {
-                            // Failed to read value
-
-                        }
-                    });
-                    mUserDatabase.child(current_user_id).child("device_token").setValue(deviceToken).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(getApplicationContext(), "Logged  In", Toast.LENGTH_SHORT).show();
-                            Intent a=new Intent(getApplicationContext(),Homeis.class);
-                            a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(a);
-                            CustomIntent.customType(Locationout.this,"fadein-to-fadeout");
-                            finish();
-                        }
-                    });
-                } else {
-
-                    //Toast.makeText(getApplicationContext(), "Error : " + task_result, Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-
     }
 
     private String getCityName(LatLng myCoordinates) {
