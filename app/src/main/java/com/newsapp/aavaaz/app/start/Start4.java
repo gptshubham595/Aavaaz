@@ -35,11 +35,6 @@ import java.io.InputStream;
 import maes.tech.intentanim.CustomIntent;
 
 import static com.newsapp.aavaaz.app.MainActivity.city;
-import static com.newsapp.aavaaz.app.activity.SampleActivity.country;
-
-import static com.newsapp.aavaaz.app.activity.SampleActivity.latitude;
-import static com.newsapp.aavaaz.app.activity.SampleActivity.longitude;
-import static com.newsapp.aavaaz.app.activity.SampleActivity.state;
 import static com.newsapp.aavaaz.app.secondpage.NewsSports.SWIPE_THRESHOLD;
 import static com.newsapp.aavaaz.app.secondpage.NewsSports.SWIPE_VELOCITY_THRESHOLD;
 
