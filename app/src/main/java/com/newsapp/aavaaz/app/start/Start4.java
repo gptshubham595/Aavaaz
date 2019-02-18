@@ -34,9 +34,7 @@ import java.io.InputStream;
 
 import maes.tech.intentanim.CustomIntent;
 
-import static com.newsapp.aavaaz.app.MainActivity.city;
-import static com.newsapp.aavaaz.app.secondpage.NewsSports.SWIPE_THRESHOLD;
-import static com.newsapp.aavaaz.app.secondpage.NewsSports.SWIPE_VELOCITY_THRESHOLD;
+
 
 
 public class Start4 extends AppCompatActivity implements GestureDetector.OnGestureListener,GestureDetector.OnDoubleTapListener {
