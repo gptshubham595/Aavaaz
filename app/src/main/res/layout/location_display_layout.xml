@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     >
-
     <TextView
         android:id="@+id/locationText"
         android:layout_width="0dp"

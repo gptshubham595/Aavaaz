@@ -80,7 +80,7 @@
             <TextView                        android:layout_width="100dp"   android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_below="@id/business"
-            android:text="Business"
+            android:text="व्यापार"
             android:textColor="#3c3c44"
             android:textSize="12sp"	/>
         </RelativeLayout>
@@ -102,7 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/international"
         android:gravity="center"
-        android:text="Crime"
+        android:text="अपराध"
         android:textColor="#3c3c44"
         android:textSize="12sp" />
         </RelativeLayout>
@@ -124,7 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/sports"
         android:gravity="center"
-        android:text="Sports"
+        android:text="खेल"
         android:textColor="#3c3c44"
         android:textSize="12sp" />
         </RelativeLayout>
@@ -143,7 +143,7 @@
             <TextView                        android:layout_width="100dp"   android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_below="@id/education"
-            android:text="Technology"
+            android:text="टैकनोलजी"
             android:textColor="#3c3c44"
             android:textSize="12sp"	/>
         </RelativeLayout>
@@ -160,7 +160,7 @@
             <TextView                        android:layout_width="108dp"   android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_below="@id/entertainment"
-            android:text="Entertainment"
+            android:text="मनोरंजन"
             android:textColor="#3c3c44"
             android:textSize="12sp"	/>
         </RelativeLayout>
@@ -177,7 +177,7 @@
             <TextView                        android:layout_width="100dp"   android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_below="@id/lifestyle"
-            android:text="LifeStyle"
+            android:text="लाइफस्टाइल"
             android:textColor="#3c3c44"
             android:textSize="12sp"	/>
         </RelativeLayout>
@@ -196,7 +196,7 @@
                 android:layout_width="100dp"   android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_below="@id/gadgets"
-            android:text="Miscellaneous"
+            android:text="विविध"
             android:textColor="#3c3c44"
             android:textSize="12sp"	/>
         </RelativeLayout>
@@ -213,7 +213,7 @@
             <TextView                        android:layout_width="100dp"   android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_below="@id/agriculture"
-            android:text="Viral"
+            android:text="वायरल"
             android:textColor="#3c3c44"
             android:textSize="12sp"	/>
         </RelativeLayout>

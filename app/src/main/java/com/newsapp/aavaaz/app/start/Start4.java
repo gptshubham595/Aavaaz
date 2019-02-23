@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.newsapp.aavaaz.app.MainActivity2;
 import com.newsapp.aavaaz.app.R;
 import com.newsapp.aavaaz.app.secondpage.Homeis;
 
@@ -36,7 +37,6 @@ import maes.tech.intentanim.CustomIntent;
 
 
 
-
 public class Start4 extends AppCompatActivity implements GestureDetector.OnGestureListener,GestureDetector.OnDoubleTapListener {
 
     public static final int SWIPE_THRESHOLD = 100;
@@ -44,9 +44,6 @@ public class Start4 extends AppCompatActivity implements GestureDetector.OnGestu
  
 public static String aid,id;
    private FirebaseAuth mAuth;
-    private FusedLocationProviderClient mFusedLocationClient;
-    LocationManager locationManager;
-    private LocationCallback mLocationCallback;
     String pass = "123456789";
     private GestureDetector gestureDetector;  @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +55,7 @@ public static String aid,id;
         id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + "@gmail.com";
         aid = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 gestureDetector = new GestureDetector(this);
+
 
       //  ImageView image =findViewById(R.id.image);
      //   Glide.with(this).asGif().load(R.drawable.start1is).into(image);
@@ -171,9 +169,8 @@ gestureDetector = new GestureDetector(this);
 
     private void onSwipeLeft() {
         ////Toast.makeText(getApplicationContext(),"Right swipe",//Toast.LENGTH_SHORT).show();
-       String password="123456789";
-       loginUser(id,password);
- Intent a=new Intent(getApplicationContext(),Homeis.class);
+
+ Intent a=new Intent(getApplicationContext(),MainActivity2.class);
         a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
         CustomIntent.customType(this,"left-to-right");
 

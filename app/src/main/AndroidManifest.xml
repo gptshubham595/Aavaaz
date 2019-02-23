@@ -5,7 +5,8 @@
     <!-- Required to check whether user has network connection or not -->
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+
+  <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -36,7 +37,8 @@ android:label="@string/app_name"
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <uses-library android:name="org.apache.http.legacy"
+            android:required="false"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.newsapp.aavaaz.app"

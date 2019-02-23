@@ -62,7 +62,6 @@ public class SampleService extends LocationBaseService {
         Intent intent = new Intent(ACTION_LOCATION_FAILED);
         intent.putExtra(EXTRA_FAIL_TYPE, type);
         sendBroadcast(intent);
-
         stopSelf();
     }
 

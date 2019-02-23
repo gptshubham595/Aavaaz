@@ -2,7 +2,10 @@
     android:layout_width="match_parent"
 
     android:layout_height="match_parent"
-    android:layout_margin="60dp"
+    android:layout_marginLeft="60dp"
+    android:layout_marginRight="60dp"
+    android:layout_marginBottom="60dp"
+    android:layout_marginTop="20dp"
     android:padding="@dimen/padding">
 <RelativeLayout
     android:layout_width="match_parent"
@@ -15,7 +18,7 @@
         android:layout_height="wrap_content"
         android:textColor="#3c3c44"
         android:layout_margin="8dp"
-        android:text="Sports"
+        android:text="खेल"
         android:background="@drawable/shape"
         android:gravity="center"
         android:fontFamily="@font/glegoo"
@@ -28,7 +31,7 @@
         android:layout_height="wrap_content"
         android:textColor="#3c3c44"
         android:layout_margin="8dp"
-        android:text="Home"
+        android:text="होम"
         android:background="@drawable/shape"
         android:gravity="center"
         android:fontFamily="@font/glegoo"
@@ -41,7 +44,7 @@
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:textColor="#3c3c44"
-        android:text="Politics"
+        android:text="राजनीति"
         android:fontFamily="@font/glegoo"
         android:background="@drawable/shape"
         android:gravity="center"
@@ -55,7 +58,7 @@
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:textColor="#3c3c44"
-        android:text="Technology"
+        android:text="टैकनोलजी"
         android:background="@drawable/shape"
         android:gravity="center"
         android:textSize="15sp" />
@@ -68,7 +71,7 @@
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:textColor="#3c3c44"
-        android:text="Entertainment"
+        android:text="मनोरंजन"
         android:background="@drawable/shape"
         android:gravity="center"
         android:textSize="15sp" />
@@ -83,7 +86,7 @@
         android:textColor="#3c3c44"
         android:background="@drawable/shape"
         android:gravity="center"
-        android:text="Business"
+        android:text="व्यापार"
         android:textSize="15sp" />
     <TextView
         android:id="@+id/agriculture"
@@ -96,7 +99,7 @@
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:textColor="#3c3c44"
-        android:text="Viral"
+        android:text="वायरल"
         android:textSize="15sp" />
 <TextView
         android:id="@+id/lifestyle"
@@ -105,7 +108,7 @@
     android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:textColor="#3c3c44"
-        android:text="LifeStyle"
+        android:text="लाइफस्टाइल"
         android:fontFamily="@font/glegoo"
         android:background="@drawable/shape"
         android:gravity="center"
@@ -118,7 +121,7 @@
     android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:textColor="#3c3c44"
-        android:text="Miscellaneous"
+        android:text="विविध"
         android:background="@drawable/shape"
         android:gravity="center"
         android:fontFamily="@font/glegoo"
@@ -131,7 +134,7 @@
     android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:textColor="#3c3c44"
-        android:text="Crime"
+        android:text="अपराध"
         android:layout_margin="12dp"
         android:fontFamily="@font/glegoo"
         android:background="@drawable/shape"

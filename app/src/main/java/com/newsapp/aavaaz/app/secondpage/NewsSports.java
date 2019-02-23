@@ -326,7 +326,7 @@ public class NewsSports extends AppCompatActivity implements GestureDetector.OnG
         Uri path=FileProvider.getUriForFile(getBaseContext(),"com.newsapp.aavaaz.app",imagepath);
         Intent share=new Intent();
         share.setAction(Intent.ACTION_SEND);
-        share.putExtra(Intent.EXTRA_TEXT,heading.getText());
+        share.putExtra(Intent.EXTRA_TEXT,heading.getText()+"  जागरूक रहें। समय बचाओ। 60 शब्दों में समाचार पढ़ने के लिए Aavaaz डाउनलोड करें।http://bit.ly/newsaavaaz");
         share.putExtra(Intent.EXTRA_STREAM,path);
         share.setType("image/*");
         startActivity(Intent.createChooser(share,"Share..."));
@@ -708,7 +708,7 @@ private void getsourceurlr() {
                 load.dismiss();
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                if(!dataSnapshot.exists()){right(); }
+                if(!dataSnapshot.exists()){  }
                 else{url = dataSnapshot.getValue(String.class);
                     }
             }
@@ -734,7 +734,7 @@ private void getsourceurlr() {
                 load.dismiss();
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                if(!dataSnapshot.exists()){left();}
+                if(!dataSnapshot.exists()){ }
                 else{url = dataSnapshot.getValue(String.class);
                     }
             }
@@ -875,7 +875,18 @@ private void geturl() {
                 load.dismiss();
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                if(!dataSnapshot.exists()){right(); }
+                if(!dataSnapshot.exists()){  FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = current_user.getUid();
+        i++;
+        DatabaseReference mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last").child("Sports");
+        mi.setValue(i+"").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+
+                }
+            }
+        }); right();}
                 else{String value = dataSnapshot.getValue(String.class);
                     heading.setText(value);}
             }
@@ -900,7 +911,7 @@ private void geturlr() {
                 load.dismiss();
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                if(!dataSnapshot.exists()){right(); }
+                if(!dataSnapshot.exists()){ }
                 else{String value = dataSnapshot.getValue(String.class);
                     urllink.setText(value);}
             }
@@ -992,7 +1003,18 @@ private void geturlr() {
                 load.dismiss();
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                if(!dataSnapshot.exists()){left();}
+                if(!dataSnapshot.exists()){ FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = current_user.getUid();
+        i--;
+        DatabaseReference mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last").child("Sports");
+        mi.setValue(i+"").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+
+                }
+            }
+        }); left();}
                 else{String value = dataSnapshot.getValue(String.class);
                     heading.setText(value);}
             }
@@ -1018,7 +1040,7 @@ private void geturlll() {
                 load.dismiss();
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                if(!dataSnapshot.exists()){left();}
+                if(!dataSnapshot.exists()){ }
                 else{String value = dataSnapshot.getValue(String.class);
                     urllink.setText(value);}
             }
@@ -1154,13 +1176,12 @@ private void geturlll() {
         CustomIntent.customType(this,"up-to-bottom");
     }
     private void right(){
-        incrementi();
-        Intent a=new Intent(getApplicationContext(),NewsInternational.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
+               Intent a=new Intent(getApplicationContext(),NewsInternational.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
         //overridePendingTransition(R.anim.slideintop,R.anim.slideoutdown);
         CustomIntent.customType(this,"right-to-left");
     }
-    private void left()                  {
-        decrementi();
+    private void left(){
+      
         ////Toast.makeText(getApplicationContext(),"Top swipe",//Toast.LENGTH_SHORT).show();
         Intent a=new Intent(getApplicationContext(),NewsEducation.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
         //overridePendingTransition(R.anim.slideintop,R.anim.slideoutdown);

@@ -34,7 +34,6 @@ public class Start1 extends AppCompatActivity implements GestureDetector.OnGestu
     public static final int SWIPE_THRESHOLD = 100;
     public static final int SWIPE_VELOCITY_THRESHOLD = 100;
 
-   
 private GestureDetector gestureDetector;
  @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,7 +42,6 @@ private GestureDetector gestureDetector;
   
 gestureDetector = new GestureDetector(this);
 ImageView image=findViewById(R.id.image);
-
     }
 
     @Override

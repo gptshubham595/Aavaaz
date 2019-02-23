@@ -1,4 +1,5 @@
-package com.newsapp.aavaaz.app.secondpage;
+package com.newsapp.aavaaz.app
+.secondpage;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,7 +10,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -24,6 +27,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Button;
+import android.widget.MediaController;
+import android.widget.VideoView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -46,6 +51,8 @@ import com.squareup.picasso.Picasso;
 import android.Manifest;
 
 import com.newsapp.aavaaz.app.Home;
+
+
 import com.newsapp.aavaaz.app.R;
 import com.newsapp.aavaaz.app.thirdpage.NewsInternationalFull;
 
@@ -56,49 +63,59 @@ import java.io.IOException;
 
 import maes.tech.intentanim.CustomIntent;
 
-public class NewsInternational extends AppCompatActivity implements GestureDetector.OnGestureListener,GestureDetector.OnDoubleTapListener{
-    String notf_head,url;
+public class NewsInternational extends AppCompatActivity implements GestureDetector.OnGestureListener,GestureDetector.OnDoubleTapListener {
+    FirebaseUser cu;
+    String image1;
+    ProgressDialog pd;
     private DatabaseReference notification;
     private FirebaseAuth mAuth;
     private StorageReference storageReference;
     ProgressDialog load;
-    TextView urllink,urlsource;    File imagepath;
+ 
+    File imagepath;
     ImageView imageView;
-    Button up,down,share;
-    TextView heading,shortdesc;
-    public static  final int Notifyid=1;
-
-    public static  final int SWIPE_THRESHOLD=100;
-    public static  final int SWIPE_VELOCITY_THRESHOLD=100;
+    Button up, down, share;
+    TextView heading, shortdesc,urllink;
+    public static final int Notifyid = 1;
+    String notf_head,url;
+    public static final int SWIPE_THRESHOLD = 100;
+    public static final int SWIPE_VELOCITY_THRESHOLD = 100;
     private GestureDetector gestureDetector;
     ViewFlipper viewFlipper;
     ImageView img;
     Dialog dialog;
-
-    public static int i=1,Stat=0,tap=0;
-
+    boolean notify1=false;
+    String value,url2;
+    DatabaseReference mcheck;
+    public static int i = 1, Stat = 0, tap = 0;
+	VideoView video;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+        super.onCreate(savedInstanceState);
+        //==========================================================
+   //==========================================================Webview
         setContentView(R.layout.activity_news_international);
-        mAuth = FirebaseAuth.getInstance();
         urllink=findViewById(R.id.urllink);
+        mAuth = FirebaseAuth.getInstance();
         urllink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"click",Toast.LENGTH_SHORT).show();
-
+                Intent Browser=new Intent(Intent.ACTION_VIEW,Uri.parse(url));
+                startActivity(Browser);
 
             }
         });
+        //==============================================================
         //         i=super.getIntent().getExtras().getInt("i");
-     //  Toast.makeText(getApplicationContext(),i+"",Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(getApplicationContext(),i+"",Toast.LENGTH_SHORT).show();
 
-
-        /*Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+		////video=findViewById(R.id.////video);
+		
+        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
-        if (isFirstRun) {
+        /*if (isFirstRun) {
             //Toast.makeText(getApplicationContext(), "Registering You!!", Toast.LENGTH_LONG).show();
             dialog.setContentView(R.layout.instruction_dialog);
             dialog.show();
@@ -108,14 +125,17 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
         }*/
 
 //======================================================================
-        heading=findViewById(R.id.heading);
+        heading = findViewById(R.id.heading);
         mAuth = FirebaseAuth.getInstance();
 
 //======================================================================================
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = current_user.getUid();
 
-        DatabaseReference mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last").child("International");
+
+//[========================= Added Now
+        //========================================
+  DatabaseReference mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last").child("International");
         mi.keepSynced(true);
 
         mi.addValueEventListener(new ValueEventListener() {
@@ -125,7 +145,7 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){}
                 else{String value = dataSnapshot.getValue(String.class);
-                    i=Integer.parseInt(value);
+                    i  =Integer.parseInt(value);
                 }
             }
 
@@ -146,7 +166,7 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
                 startActivity(a);
             }
         });
-         
+        sendNotification(getApplicationContext());
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
         share=findViewById(R.id.share);
         share.setOnClickListener(new View.OnClickListener() {
@@ -194,12 +214,14 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
         storageReference= FirebaseStorage.getInstance().getReference();
 
         geturl(); getsourceurl(); getheading();
-        getimage();
-        getshortdesc();
-
+        
+		getimage();
+		getshortdesc();
+		
 
     }
-
+//===========================================Added Now
+    ///========================================================Till
     private void readi() {
 
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
@@ -228,6 +250,7 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
     }
 
     public void sendNotification(Context context){
+
         Intent a=new Intent(getApplicationContext(),NewsPolitics.class);
         PendingIntent pendingIntent=PendingIntent.getActivity(this,0,a,0);
         NotificationCompat.Builder builder=new NotificationCompat.Builder(this);
@@ -235,13 +258,13 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
         builder.setContentIntent(pendingIntent);
         builder.setAutoCancel(true);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher_foreground));
-        builder.setContentTitle("See ,This trending Political News");
-        builder.setContentText("Cool");
+        builder.setContentTitle("You are Seeing the best News App");
+        builder.setContentText("Aavaz");
         builder.setSubText("Tap to view" + "..");
         NotificationManager notificationManager=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(Notifyid,builder.build());
-
     }
+
     private void saveup(){        String in=i+"";
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = current_user.getUid();
@@ -253,12 +276,8 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "UpVoted!!", Toast.LENGTH_LONG).show();
-                }
-
-            }
+                } }
         });
-
-
     }
     private void savedown(){        String in=i+"";
 
@@ -307,11 +326,17 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
         Uri path=FileProvider.getUriForFile(getBaseContext(),"com.newsapp.aavaaz.app",imagepath);
         Intent share=new Intent();
         share.setAction(Intent.ACTION_SEND);
-        share.putExtra(Intent.EXTRA_TEXT,heading.getText());
+        share.putExtra(Intent.EXTRA_TEXT,heading.getText()+"  जागरूक रहें। समय बचाओ। 60 शब्दों में समाचार पढ़ने के लिए Aavaaz डाउनलोड करें।http://bit.ly/newsaavaaz");
         share.putExtra(Intent.EXTRA_STREAM,path);
         share.setType("image/*");
         startActivity(Intent.createChooser(share,"Share..."));
 
+    }
+    private void makedialog2() {
+        dialog.setContentView(R.layout.instruction_dialog);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        dialog.show();
     }
     private void makedialog(){
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.dialog));
@@ -400,7 +425,7 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
     }
 
 
-	private void getimage() {
+    private void getimage() {
 
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = current_user.getUid();
@@ -441,8 +466,8 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
                                     }
                                 });
                             }
-
-
+							
+							//play();
                         }
 
                         @Override
@@ -463,6 +488,70 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
         });
 
     }
+	
+	/*private void play() {
+		FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = current_user.getUid();
+
+        DatabaseReference mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last").child("International");
+        mi.keepSynced(true);
+
+        mi.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()){}
+                else{String value = dataSnapshot.getValue(String.class);
+                    i=Integer.parseInt(value);
+                    String in=value;
+                                DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("url");
+                    mheading.keepSynced(true);
+                    // Read from the database
+                    mheading.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            // This method is called once with the initial value and again
+                            // whenever data at this location is updated.
+                            if(!dataSnapshot.exists()){}
+                            else{url = dataSnapshot.getValue(String.class);
+                                load.setMessage("Loading..");
+                                load.show();
+		//MediaController media=new MediaController(NewsInternational.this);
+		//media.setAnchorView(////video);
+		//Uri uri=Uri.parse(url);
+
+		//video.setMediaController(media);
+		//video.setVideoURI(uri);
+                                //video.seekTo(1);
+		//video.requestFocus();
+		//video.start();
+         //video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                    @Override
+                                    public void onPrepared(MediaPlayer mp) {
+                                        load.dismiss();
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError error) {
+                            // Failed to read value
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+
+            }
+        });
+	}*/
     private void getshortdesc() {
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = current_user.getUid();
@@ -511,7 +600,6 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
         });
 
     }
-
     private void getheading() {
 
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
@@ -559,10 +647,156 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
             }
         });
     }
+	private void getsourceurl() {
 
+        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = current_user.getUid();
+
+        DatabaseReference mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last").child("International");
+        mi.keepSynced(true);
+
+        mi.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()){}
+                else{String value = dataSnapshot.getValue(String.class);
+                    i=Integer.parseInt(value);
+                    String in=value;
+                    DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlsource");
+                    mheading.keepSynced(true);
+                    // Read from the database
+                    mheading.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            // This method is called once with the initial value and again
+                            // whenever data at this location is updated.
+                            if(!dataSnapshot.exists()){}
+                            else{url= dataSnapshot.getValue(String.class);
+                    }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError error) {
+                            // Failed to read value
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+
+            }
+        });
+    }
+private void getsourceurlr() {
+        load.setTitle("Wait");
+        load.setMessage("Getting the latest news for you..");
+        load.show();
+        String in=i+"";
+        DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlsource");
+// Read from the database
+        mheading.keepSynced(true);
+        mheading.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                load.dismiss();
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()){  }
+                else{url = dataSnapshot.getValue(String.class);
+                    }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+    }
+	
+	private void getsourceurll() {
+        load.setTitle("Wait");
+        load.setMessage("Getting the latest news for you..");
+        load.show();
+        String in=i+"";
+        DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlsource");
+// Read from the database
+        mheading.keepSynced(true);
+        mheading.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                load.dismiss();
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()){ }
+                else{url = dataSnapshot.getValue(String.class);
+                    }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+    }
+
+private void geturl() {
+
+        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = current_user.getUid();
+
+        DatabaseReference mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last").child("International");
+        mi.keepSynced(true);
+
+        mi.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()){}
+                else{String value = dataSnapshot.getValue(String.class);
+                    i=Integer.parseInt(value);
+                    String in=value;
+                    DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlread");
+                    mheading.keepSynced(true);
+                    // Read from the database
+                    mheading.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            // This method is called once with the initial value and again
+                            // whenever data at this location is updated.
+                            if(!dataSnapshot.exists()){}
+                            else{String value = dataSnapshot.getValue(String.class);
+                                urllink.setText(value);}
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError error) {
+                            // Failed to read value
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+
+            }
+        });
+    }
 
     private void getimager() {
-        String in=i+"";
+        
+		String in=i+"";
         load.setTitle("Wait");
         load.setMessage("Getting the latest news for you..");
         load.show();
@@ -578,7 +812,7 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
 
                 }
                 else{
-                    final  String image1=dataSnapshot.getValue().toString();
+                    image1=dataSnapshot.getValue().toString();
                     Picasso.get().load(image1).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.slide1).into(img, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -616,7 +850,7 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){}
-                else{String value = dataSnapshot.getValue(String.class);
+                else{ value = dataSnapshot.getValue(String.class);
                     shortdesc.setText(value);}
             }
 
@@ -627,7 +861,11 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
             }
         });
     }
-    private void getheadingr() {       String in=i+"";
+    private void getheadingr() {
+        load.setTitle("Wait");
+        load.setMessage("Getting the latest news for you..");
+        load.show();
+        String in=i+"";
         DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("heading");
 // Read from the database
         mheading.keepSynced(true);
@@ -637,9 +875,45 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
                 load.dismiss();
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                if(!dataSnapshot.exists()){right(); }
+                if(!dataSnapshot.exists()){  FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = current_user.getUid();
+        i++;
+        DatabaseReference mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last").child("International");
+        mi.setValue(i+"").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+
+                }
+            }
+        }); right();}
                 else{String value = dataSnapshot.getValue(String.class);
                     heading.setText(value);}
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+    }
+private void geturlr() {
+        load.setTitle("Wait");
+        load.setMessage("Getting the latest news for you..");
+        load.show();
+        String in=i+"";
+        DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlread");
+// Read from the database
+        mheading.keepSynced(true);
+        mheading.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                load.dismiss();
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()){ }
+                else{String value = dataSnapshot.getValue(String.class);
+                    urllink.setText(value);}
             }
 
             @Override
@@ -715,205 +989,10 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
             }
         });
     }
-    private void getsourceurl() {
-
-        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = current_user.getUid();
-
-        DatabaseReference mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last").child("International");
-        mi.keepSynced(true);
-
-        mi.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                if(!dataSnapshot.exists()){}
-                else{String value = dataSnapshot.getValue(String.class);
-                    i=Integer.parseInt(value);
-                    String in=value;
-                    DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlsource");
-                    mheading.keepSynced(true);
-                    // Read from the database
-                    mheading.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            // This method is called once with the initial value and again
-                            // whenever data at this location is updated.
-                            if(!dataSnapshot.exists()){}
-                            else{url= dataSnapshot.getValue(String.class);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError error) {
-                            // Failed to read value
-                        }
-                    });
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-
-            }
-        });
-    }
-    private void getsourceurlr() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
-        String in=i+"";
-        DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlsource");
-// Read from the database
-        mheading.keepSynced(true);
-        mheading.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                if(!dataSnapshot.exists()){right(); }
-                else{url = dataSnapshot.getValue(String.class);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-            }
-        });
-    }
-
-    private void getsourceurll() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
-        String in=i+"";
-        DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlsource");
-// Read from the database
-        mheading.keepSynced(true);
-        mheading.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                if(!dataSnapshot.exists()){left();}
-                else{url = dataSnapshot.getValue(String.class);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-            }
-        });
-    }
-
-    private void geturl() {
-
-        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = current_user.getUid();
-
-        DatabaseReference mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last").child("International");
-        mi.keepSynced(true);
-
-        mi.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                if(!dataSnapshot.exists()){}
-                else{String value = dataSnapshot.getValue(String.class);
-                    i=Integer.parseInt(value);
-                    String in=value;
-                    DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlread");
-                    mheading.keepSynced(true);
-                    // Read from the database
-                    mheading.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            // This method is called once with the initial value and again
-                            // whenever data at this location is updated.
-                            if(!dataSnapshot.exists()){}
-                            else{String value = dataSnapshot.getValue(String.class);
-                                urllink.setText(value);}
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError error) {
-                            // Failed to read value
-                        }
-                    });
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-
-            }
-        });
-    }
-    private void geturlr() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
-        String in=i+"";
-        DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlread");
-// Read from the database
-        mheading.keepSynced(true);
-        mheading.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                if(!dataSnapshot.exists()){right(); }
-                else{String value = dataSnapshot.getValue(String.class);
-                    urllink.setText(value);}
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-            }
-        });
-    }
-
-    private void geturlll() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
-        String in=i+"";
-        DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlread");
-// Read from the database
-        mheading.keepSynced(true);
-        mheading.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                if(!dataSnapshot.exists()){left();}
-                else{String value = dataSnapshot.getValue(String.class);
-                    urllink.setText(value);}
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-            }
-        });
-    }
-
     private void getheadingl() {
+        load.setTitle("Wait");
+        load.setMessage("Getting the latest news for you..");
+        load.show();
         String in=i+"";
         DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("heading");
 // Read from the database
@@ -924,7 +1003,18 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
                 load.dismiss();
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                if(!dataSnapshot.exists()){left();}
+                if(!dataSnapshot.exists()){ FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = current_user.getUid();
+        i--;
+        DatabaseReference mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last").child("International");
+        mi.setValue(i+"").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+
+                }
+            }
+        }); left();}
                 else{String value = dataSnapshot.getValue(String.class);
                     heading.setText(value);}
             }
@@ -936,6 +1026,31 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
         });
     }
 
+private void geturlll() {
+        load.setTitle("Wait");
+        load.setMessage("Getting the latest news for you..");
+        load.show();
+        String in=i+"";
+        DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlread");
+// Read from the database
+        mheading.keepSynced(true);
+        mheading.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                load.dismiss();
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()){ }
+                else{String value = dataSnapshot.getValue(String.class);
+                    urllink.setText(value);}
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+    }
 
 
 
@@ -1049,26 +1164,24 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
         });
     }
     private void onSwipeTop() {
-        Intent a=new Intent(getApplicationContext(),NewsSports.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
+        Intent a=new Intent(getApplicationContext(),NewsSports.class);     a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
         //overridePendingTransition(R.anim.slideintop,R.anim.slideoutdown);
         CustomIntent.customType(this,"bottom-to-up");
     }
     private void onSwipeBottom() {
-
-	Intent a=new Intent(getApplicationContext(),NewsBusiness.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
-
-	////Toast.makeText(getApplicationContext(),"Top swipe",//Toast.LENGTH_SHORT).show();
+        ////Toast.makeText(getApplicationContext(),"Top swipe",//Toast.LENGTH_SHORT).show();
+        Intent a=new Intent(getApplicationContext(),NewsEducation.class);
+		   a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
         //overridePendingTransition(R.anim.slideintop,R.anim.slideoutdown);
         CustomIntent.customType(this,"up-to-bottom");
     }
     private void right(){
-        incrementi();
-        Intent a=new Intent(getApplicationContext(),NewsBusiness.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
+               Intent a=new Intent(getApplicationContext(),NewsEducation.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
         //overridePendingTransition(R.anim.slideintop,R.anim.slideoutdown);
         CustomIntent.customType(this,"right-to-left");
     }
-    private void left()                  {
-        decrementi();
+    private void left(){
+      
         ////Toast.makeText(getApplicationContext(),"Top swipe",//Toast.LENGTH_SHORT).show();
         Intent a=new Intent(getApplicationContext(),NewsSports.class);    a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
         //overridePendingTransition(R.anim.slideintop,R.anim.slideoutdown);
@@ -1109,3 +1222,4 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
     }
 
 }
+

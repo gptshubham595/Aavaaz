@@ -8,7 +8,7 @@ import com.newsapp.aavaaz.app.secondpage.Homeis;
 
 import maes.tech.intentanim.CustomIntent;
 public class MainActivity2 extends AppCompatActivity {
-  
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
