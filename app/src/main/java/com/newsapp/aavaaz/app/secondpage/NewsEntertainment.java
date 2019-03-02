@@ -21,6 +21,8 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -107,6 +109,12 @@ public class NewsEntertainment extends AppCompatActivity implements GestureDetec
 
             }
         });
+		
+        DisplayMetrics displayMetrics=new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screenh=displayMetrics.heightPixels;
+        //int screenw=displayMetrics.widthPixels;
+        int imgh=(int)(screenh* .4);
         //==============================================================
         //         i=super.getIntent().getExtras().getInt("i");
         //  Toast.makeText(getApplicationContext(),i+"",Toast.LENGTH_SHORT).show();
@@ -179,7 +187,7 @@ public class NewsEntertainment extends AppCompatActivity implements GestureDetec
         });
 
 
-        up=findViewById(R.id.up);   img=findViewById(R.id.slide);
+        up=findViewById(R.id.up);   img=findViewById(R.id.slide); img.getLayoutParams().height=imgh;
         up.setOnClickListener(new View.OnClickListener() {
             @Override  public void onClick(View v) {
 

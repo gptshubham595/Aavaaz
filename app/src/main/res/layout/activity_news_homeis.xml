@@ -21,9 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-
         app:layout_constraintTop_toBottomOf="@id/button2"
-        app:layout_constraintTop_toTopOf="@id/guideline2"
         />
 
     <TextView
@@ -58,8 +56,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape6"
-        app:layout_constraintTop_toBottomOf="@id/desc">
-
+        app:layout_constraintTop_toBottomOf="@id/desc"
+        android:layout_marginBottom="51dp"
+        >
         <TextView
             android:id="@+id/newis"
             android:layout_width="match_parent"
@@ -86,9 +85,11 @@
 
 
     <RelativeLayout
+        android:id="@+id/lay"
         android:layout_width="match_parent"
         android:layout_below="@id/read"
-        android:layout_height="wrap_content">	<Button
+        android:layout_height="wrap_content">
+        <Button
         android:id="@+id/up"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -129,18 +130,5 @@
 
 
     </RelativeLayout>
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="40dp"
-        app:layout_constraintGuide_percent=".08"/>
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="40dp"
-        app:layout_constraintGuide_percent=".5"/>
+
 </android.support.constraint.ConstraintLayout>
