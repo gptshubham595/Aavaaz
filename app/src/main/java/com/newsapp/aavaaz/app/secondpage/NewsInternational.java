@@ -113,7 +113,7 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int screenh=displayMetrics.heightPixels;
         //int screenw=displayMetrics.widthPixels;
-        int imgh=(int)(screenh* .4);
+        int imgh=(int)(screenh* .35);
         //==============================================================
         //         i=super.getIntent().getExtras().getInt("i");
         //  Toast.makeText(getApplicationContext(),i+"",Toast.LENGTH_SHORT).show();
@@ -174,7 +174,7 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
             }
         });
         sendNotification(getApplicationContext());
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+
         share=findViewById(R.id.share);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -255,7 +255,206 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
             }
         });
     }
+    public void getitimg(String in){
+        DatabaseReference mimage1 = FirebaseDatabase.getInstance().getReference().child("Sports").child(in).child("pic").child("id");
+        DatabaseReference mimage2 = FirebaseDatabase.getInstance().getReference().child("Politics").child(in).child("pic").child("id");
+        DatabaseReference mimage3 = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("pic").child("id");
+        DatabaseReference mimage4 = FirebaseDatabase.getInstance().getReference().child("Agriculture").child(in).child("pic").child("id");
+        DatabaseReference mimage5 = FirebaseDatabase.getInstance().getReference().child("Education").child(in).child("pic").child("id");
+        DatabaseReference mimage6 = FirebaseDatabase.getInstance().getReference().child("Business").child(in).child("pic").child("id");
+        DatabaseReference mimage7 = FirebaseDatabase.getInstance().getReference().child("Gadgets").child(in).child("pic").child("id");
+        DatabaseReference mimage8 = FirebaseDatabase.getInstance().getReference().child("Lifestyle").child(in).child("pic").child("id");
+        DatabaseReference mimage9 = FirebaseDatabase.getInstance().getReference().child("Entertainment").child(in).child("pic").child("id");
+        mimage1.keepSynced(true);
+        mimage2.keepSynced(true);
+        mimage3.keepSynced(true);
+        mimage4.keepSynced(true);
+        mimage5.keepSynced(true);
+        mimage6.keepSynced(true);
+        mimage7.keepSynced(true);
+        mimage8.keepSynced(true);
+        mimage9.keepSynced(true);
+        mimage1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()) {
+                }
+                else{
+                    final String image1 = dataSnapshot.getValue().toString();
+                    Picasso.get().load(image1).placeholder(R.drawable.slide1);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mimage2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()) {
+                }
+                else{
+                    final String image1 = dataSnapshot.getValue().toString();
+                    Picasso.get().load(image1).placeholder(R.drawable.slide1);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mimage3.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()) {
+                }
+                else{
+                    final String image1 = dataSnapshot.getValue().toString();
+                    Picasso.get().load(image1).placeholder(R.drawable.slide1);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mimage4.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()) {
+                }
+                else{
+                    final String image1 = dataSnapshot.getValue().toString();
+                    Picasso.get().load(image1).placeholder(R.drawable.slide1);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mimage5.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()) {
+                }
+                else{
+                    final String image1 = dataSnapshot.getValue().toString();
+                    Picasso.get().load(image1).placeholder(R.drawable.slide1);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mimage6.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()) {
+                }
+                else{
+                    final String image1 = dataSnapshot.getValue().toString();
+                    Picasso.get().load(image1).placeholder(R.drawable.slide1);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mimage7.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()) {
+                }
+                else{
+                    final String image1 = dataSnapshot.getValue().toString();
+                    Picasso.get().load(image1).placeholder(R.drawable.slide1);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mimage8.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()) {
+                }
+                else{
+                    final String image1 = dataSnapshot.getValue().toString();
+                    Picasso.get().load(image1).placeholder(R.drawable.slide1);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mimage9.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(!dataSnapshot.exists()) {
+                }
+                else{
+                    final String image1 = dataSnapshot.getValue().toString();
+                    Picasso.get().load(image1).placeholder(R.drawable.slide1);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
     public void sendNotification(Context context){
 
         Intent a=new Intent(getApplicationContext(),NewsPolitics.class);
@@ -433,7 +632,9 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
 
 
     private void getimage() {
-
+        load.setTitle("Wait");
+        load.setMessage("Getting the latest news for you..");
+        load.show();
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = current_user.getUid();
 
@@ -449,7 +650,7 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
                 else{String value = dataSnapshot.getValue(String.class);
                     i=Integer.parseInt(value);
                     String in=value;
-
+                    ////getitimg(in);
                     DatabaseReference mimage = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("pic").child("id");
                     mimage.keepSynced(true);
                     mimage.addValueEventListener(new ValueEventListener() {
@@ -472,8 +673,9 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
                                         Picasso.get().load(image1).placeholder(R.drawable.slide1).into(img);
                                     }
                                 });
+								load.dismiss();
                             }
-							
+
 							//play();
                         }
 
@@ -702,9 +904,6 @@ public class NewsInternational extends AppCompatActivity implements GestureDetec
         });
     }
 private void getsourceurlr() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
         String in=i+"";
         DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlsource");
 // Read from the database
@@ -712,7 +911,7 @@ private void getsourceurlr() {
         mheading.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
+                
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){  }
@@ -727,18 +926,14 @@ private void getsourceurlr() {
         });
     }
 	
-	private void getsourceurll() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
-        String in=i+"";
+private void getsourceurll() {   String in=i+"";
         DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlsource");
 // Read from the database
         mheading.keepSynced(true);
         mheading.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
+                
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){ }
@@ -813,7 +1008,7 @@ private void geturl() {
         mimage.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();                // This method is called once with the initial value and again
+                                // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){
 
@@ -830,7 +1025,7 @@ private void geturl() {
                         public void onError(Exception e) {
                             Picasso.get().load(image1).placeholder(R.drawable.slide1).into(img);
                         }
-                    });
+                    });load.dismiss();
                 }
 
 
@@ -869,9 +1064,6 @@ private void geturl() {
         });
     }
     private void getheadingr() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
         String in=i+"";
         DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("heading");
 // Read from the database
@@ -879,7 +1071,7 @@ private void geturl() {
         mheading.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
+                
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){  FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
@@ -904,18 +1096,14 @@ private void geturl() {
             }
         });
     }
-private void geturlr() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
-        String in=i+"";
+private void geturlr() {        String in=i+"";
         DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlread");
 // Read from the database
         mheading.keepSynced(true);
         mheading.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
+                
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){ }
@@ -941,7 +1129,7 @@ private void geturlr() {
         mimage.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();                // This method is called once with the initial value and again
+                                // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){
 
@@ -997,9 +1185,6 @@ private void geturlr() {
         });
     }
     private void getheadingl() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
         String in=i+"";
         DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("heading");
 // Read from the database
@@ -1007,7 +1192,7 @@ private void geturlr() {
         mheading.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
+                
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){ FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
@@ -1033,18 +1218,14 @@ private void geturlr() {
         });
     }
 
-private void geturlll() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
-        String in=i+"";
+private void geturlll() {        String in=i+"";
         DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("International").child(in).child("content").child("urlread");
 // Read from the database
         mheading.keepSynced(true);
         mheading.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
+                
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){ }
@@ -1165,7 +1346,6 @@ private void geturlll() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-
                 }
             }
         });
@@ -1177,7 +1357,7 @@ private void geturlll() {
     }
     private void onSwipeBottom() {
         ////Toast.makeText(getApplicationContext(),"Top swipe",//Toast.LENGTH_SHORT).show();
-        Intent a=new Intent(getApplicationContext(),NewsEducation.class);
+        Intent a=new Intent(getApplicationContext(),NewsBusiness.class);
 		   a.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  startActivity(a);
         //overridePendingTransition(R.anim.slideintop,R.anim.slideoutdown);
         CustomIntent.customType(this,"up-to-bottom");

@@ -86,7 +86,7 @@
         android:textColor="#3c3c44"
         android:background="@drawable/shape"
         android:gravity="center"
-        android:text="व्यापार"
+        android:text="क्षेत्रीय"
         android:textSize="15sp" />
     <TextView
         android:id="@+id/agriculture"

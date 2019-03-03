@@ -113,7 +113,7 @@ public class NewsBusiness extends AppCompatActivity implements GestureDetector.O
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int screenh=displayMetrics.heightPixels;
         //int screenw=displayMetrics.widthPixels;
-        int imgh=(int)(screenh* .4);
+        int imgh=(int)(screenh* .35);
         //==============================================================
         //         i=super.getIntent().getExtras().getInt("i");
         //  Toast.makeText(getApplicationContext(),i+"",Toast.LENGTH_SHORT).show();
@@ -174,7 +174,7 @@ public class NewsBusiness extends AppCompatActivity implements GestureDetector.O
             }
         });
         sendNotification(getApplicationContext());
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+
         share=findViewById(R.id.share);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -433,7 +433,9 @@ public class NewsBusiness extends AppCompatActivity implements GestureDetector.O
 
 
     private void getimage() {
-
+        load.setTitle("Wait");
+        load.setMessage("Getting the latest news for you..");
+        load.show();
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = current_user.getUid();
 
@@ -471,7 +473,7 @@ public class NewsBusiness extends AppCompatActivity implements GestureDetector.O
                                     public void onError(Exception e) {
                                         Picasso.get().load(image1).placeholder(R.drawable.slide1).into(img);
                                     }
-                                });
+                                });load.dismiss();
                             }
 							
 							//play();
@@ -702,9 +704,6 @@ public class NewsBusiness extends AppCompatActivity implements GestureDetector.O
         });
     }
 private void getsourceurlr() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
         String in=i+"";
         DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("Business").child(in).child("content").child("urlsource");
 // Read from the database
@@ -712,7 +711,7 @@ private void getsourceurlr() {
         mheading.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
+                
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){  }
@@ -727,18 +726,14 @@ private void getsourceurlr() {
         });
     }
 	
-	private void getsourceurll() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
-        String in=i+"";
+private void getsourceurll() {   String in=i+"";
         DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("Business").child(in).child("content").child("urlsource");
 // Read from the database
         mheading.keepSynced(true);
         mheading.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
+                
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){ }
@@ -813,7 +808,7 @@ private void geturl() {
         mimage.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();                // This method is called once with the initial value and again
+                                // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){
 
@@ -830,7 +825,7 @@ private void geturl() {
                         public void onError(Exception e) {
                             Picasso.get().load(image1).placeholder(R.drawable.slide1).into(img);
                         }
-                    });
+                    });load.dismiss();
                 }
 
 
@@ -869,9 +864,6 @@ private void geturl() {
         });
     }
     private void getheadingr() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
         String in=i+"";
         DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("Business").child(in).child("content").child("heading");
 // Read from the database
@@ -879,7 +871,7 @@ private void geturl() {
         mheading.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
+                
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){  FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
@@ -904,18 +896,14 @@ private void geturl() {
             }
         });
     }
-private void geturlr() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
-        String in=i+"";
+private void geturlr() {        String in=i+"";
         DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("Business").child(in).child("content").child("urlread");
 // Read from the database
         mheading.keepSynced(true);
         mheading.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
+                
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){ }
@@ -941,7 +929,7 @@ private void geturlr() {
         mimage.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();                // This method is called once with the initial value and again
+                                // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){
 
@@ -958,7 +946,7 @@ private void geturlr() {
                         public void onError(Exception e) {
                             Picasso.get().load(image1).placeholder(R.drawable.slide1).into(img);
                         }
-                    });
+                    });load.dismiss();
                 }
 
 
@@ -997,9 +985,6 @@ private void geturlr() {
         });
     }
     private void getheadingl() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
         String in=i+"";
         DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("Business").child(in).child("content").child("heading");
 // Read from the database
@@ -1007,7 +992,7 @@ private void geturlr() {
         mheading.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
+                
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){ FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
@@ -1033,18 +1018,14 @@ private void geturlr() {
         });
     }
 
-private void geturlll() {
-        load.setTitle("Wait");
-        load.setMessage("Getting the latest news for you..");
-        load.show();
-        String in=i+"";
+private void geturlll() {        String in=i+"";
         DatabaseReference mheading = FirebaseDatabase.getInstance().getReference().child("Business").child(in).child("content").child("urlread");
 // Read from the database
         mheading.keepSynced(true);
         mheading.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();
+                
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){ }

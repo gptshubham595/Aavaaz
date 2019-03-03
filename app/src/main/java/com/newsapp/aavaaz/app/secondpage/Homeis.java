@@ -48,6 +48,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import com.newsapp.aavaaz.app.Locationout;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -114,7 +115,7 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int screenh=displayMetrics.heightPixels;
         //int screenw=displayMetrics.widthPixels;
-        int imgh=(int)(screenh* .4);
+        int imgh=(int)(screenh* .35);
         Toast.makeText(getApplicationContext(),screenh+"",Toast.LENGTH_SHORT).show();
         int texth1=(int)(screenh*0.0864);
         int texth2=(int)(screenh*0.00724);
@@ -507,7 +508,7 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
 
                         }
                     });
-                    getitimg(in);
+                    //getitimg(in);
                 }
             }
 
@@ -999,7 +1000,6 @@ private void geturl() {
                     mheading.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-
                             // This method is called once with the initial value and again
                             // whenever data at this location is updated.
                             if(!dataSnapshot.exists()){}
@@ -1065,7 +1065,7 @@ private void geturl() {
 
             }
         });
-getitimg(in);
+//getitimg(in);
 
     }
 
@@ -1165,7 +1165,7 @@ private void geturlr() {
         mimage.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                load.dismiss();                // This method is called once with the initial value and again
+                               // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(!dataSnapshot.exists()){
 
@@ -1183,6 +1183,7 @@ private void geturlr() {
                             Picasso.get().load(image1).placeholder(R.drawable.slide1).into(img);
                         }
                     });
+                    load.dismiss();
                 }
 
 
@@ -1194,7 +1195,7 @@ private void geturlr() {
             }
         });
 
-getitimg(in);
+
     }
 
 
@@ -1450,6 +1451,29 @@ private void geturlll() {
         if(tap==1){Toast.makeText(getApplicationContext(),"Press Back Button Once more ..",Toast.LENGTH_SHORT).show();}
         if(tap>1){finish(); System.exit(0);}
     }
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser cu=mAuth.getCurrentUser();
+        if(cu == null){
+            Logout();
+        }
+    }
+
+
+    private void Logout() {
+        Intent i = new Intent(getApplicationContext(),Locationout.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+
+        finish();
+    }
+
+
+
 
 }
 
