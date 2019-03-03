@@ -193,7 +193,7 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
                 startActivity(a);
             }
         });
-        sendNotification(getApplicationContext());
+        //sendNotification(getApplicationContext());
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
         share=findViewById(R.id.share);
         share.setOnClickListener(new View.OnClickListener() {
@@ -355,7 +355,7 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
         Uri path=FileProvider.getUriForFile(getBaseContext(),"com.newsapp.aavaaz.app",imagepath);
         Intent share=new Intent();
         share.setAction(Intent.ACTION_SEND);
-        share.putExtra(Intent.EXTRA_TEXT,heading.getText()+"  जागरूक रहें। समय बचाओ। 60 शब्दों में समाचार पढ़ने के लिए Aavaaz डाउनलोड करें।http://bit.ly/newsaavaaz");
+        share.putExtra(Intent.EXTRA_TEXT,"  जागरूक रहें। समय बचाओ। 60 शब्दों में समाचार पढ़ने के लिए Aavaaz डाउनलोड करें।http://bit.ly/newsaavaaz");
         share.putExtra(Intent.EXTRA_STREAM,path);
         share.setType("image/*");
         startActivity(Intent.createChooser(share,"Share..."));
@@ -1454,23 +1454,6 @@ private void geturlll() {
 
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser cu=mAuth.getCurrentUser();
-        if(cu == null){
-            Logout();
-        }
-    }
-
-
-    private void Logout() {
-        Intent i = new Intent(getApplicationContext(),Locationout.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(i);
-
-        finish();
-    }
 
 
 

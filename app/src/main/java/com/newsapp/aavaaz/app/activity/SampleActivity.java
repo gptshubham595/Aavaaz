@@ -107,7 +107,7 @@ private void go(){
         @Override
         public void run() {
             try{
-                 sleep(300);
+                 sleep(250);
             }catch (Exception e){e.printStackTrace();}
             finally {
                 Intent a=new Intent(getApplicationContext(),Locationout.class);
@@ -126,7 +126,7 @@ private void go2(){
         @Override
         public void run() {
             try{
-                sleep(60);
+                sleep(40);
             }catch (Exception e){e.printStackTrace();}
             finally {
                 Intent a=new Intent(getApplicationContext(),Locationout.class);

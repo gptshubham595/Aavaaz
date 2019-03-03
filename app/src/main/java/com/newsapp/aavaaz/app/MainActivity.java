@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
-
+        register_user(aid, id, pass, latitude,longitude,city,state,country);
         loginUser(id,pass);
 
     }
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-                    sleep(200);
+                    sleep(300);
                 }
                 catch (Exception e){e.printStackTrace();}
                 finally {

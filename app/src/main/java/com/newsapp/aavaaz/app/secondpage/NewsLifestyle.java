@@ -174,7 +174,7 @@ public class NewsLifestyle extends AppCompatActivity implements GestureDetector.
                 startActivity(a);
             }
         });
-        sendNotification(getApplicationContext());
+        //sendNotification(getApplicationContext());
 
         share=findViewById(R.id.share);
         share.setOnClickListener(new View.OnClickListener() {
@@ -334,7 +334,7 @@ public class NewsLifestyle extends AppCompatActivity implements GestureDetector.
         Uri path=FileProvider.getUriForFile(getBaseContext(),"com.newsapp.aavaaz.app",imagepath);
         Intent share=new Intent();
         share.setAction(Intent.ACTION_SEND);
-        share.putExtra(Intent.EXTRA_TEXT,heading.getText()+"  जागरूक रहें। समय बचाओ। 60 शब्दों में समाचार पढ़ने के लिए Aavaaz डाउनलोड करें।http://bit.ly/newsaavaaz");
+        share.putExtra(Intent.EXTRA_TEXT,"  जागरूक रहें। समय बचाओ। 60 शब्दों में समाचार पढ़ने के लिए Aavaaz डाउनलोड करें।http://bit.ly/newsaavaaz");
         share.putExtra(Intent.EXTRA_STREAM,path);
         share.setType("image/*");
         startActivity(Intent.createChooser(share,"Share..."));

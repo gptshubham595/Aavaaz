@@ -116,6 +116,7 @@ public class Locationout  extends AppCompatActivity implements OnMapReadyCallbac
                     if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         Log.d("mylog", "Not granted");
                         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},1);
                     } else
                         requestLocation();
     go();
@@ -132,9 +133,10 @@ public class Locationout  extends AppCompatActivity implements OnMapReadyCallbac
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 Log.d("mylog", "Not granted");
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},1);
             } else
             {requestLocation(); go();
-}
+            }
         } else
         {requestLocation(); go(); } }
 
