@@ -48,6 +48,12 @@ public class MainActivity3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
+        city = super.getIntent().getExtras().getString("city");
+
+        state = super.getIntent().getExtras().getString("sate");
+        country = super.getIntent().getExtras().getString("country");
+        latitude = super.getIntent().getExtras().getString("lat");
+        longitude = super.getIntent().getExtras().getString("lon");
         //Toast.makeText(getApplicationContext(),city,Toast.LENGTH_SHORT).show();
         mAuth = FirebaseAuth.getInstance();
 
@@ -67,7 +73,7 @@ public class MainActivity3 extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-                    sleep(10);
+               //     sleep(10);
                 }
                 catch (Exception e){e.printStackTrace();}
                 finally {
@@ -86,11 +92,11 @@ public class MainActivity3 extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-                    sleep(40);
+             //       sleep(10);
                 }
                 catch (Exception e){e.printStackTrace();}
                 finally {
-                    Intent a=new Intent(getApplicationContext(),Locationout.class);
+                    Intent a=new Intent(getApplicationContext(),SampleActivity.class);
                     startActivity(a);
                     CustomIntent.customType(MainActivity3.this,"fadein-to-fadeout");
                 }

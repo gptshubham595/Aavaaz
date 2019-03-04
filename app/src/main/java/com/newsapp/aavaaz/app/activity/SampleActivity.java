@@ -42,7 +42,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.newsapp.aavaaz.app.MainActivity;
 import com.newsapp.aavaaz.app.MainActivity2;
-import com.newsapp.aavaaz.app.MainActivity3;
 import com.newsapp.aavaaz.app.secondpage.Homeis;
 import com.newsapp.aavaaz.app.start.Start1;
 import com.newsapp.aavaaz.base.LocationBaseActivity;
@@ -82,12 +81,14 @@ public class SampleActivity extends LocationBaseActivity implements SampleView {
 		String id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) + "@gmail.com";
         aid = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
     
-		samplePresenter = new SamplePresenter(this);
+
         Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
 		
-		loginUser(id,pass);
-        
+
+        samplePresenter = new SamplePresenter(this);
+        getLocation();
+
         }
 
 private void loginUser(final String id, String password) {
@@ -98,8 +99,7 @@ private void loginUser(final String id, String password) {
            if(task.isSuccessful()){
                go2();
            }
-           else{getLocation(); 
-           }
+
             }
         });
     }
@@ -108,7 +108,7 @@ private void go(){
         @Override
         public void run() {
             try{
-                 sleep(250);
+                 sleep(300);
             }catch (Exception e){e.printStackTrace();}
             finally {
                 Intent a=new Intent(getApplicationContext(),Locationout.class);
@@ -127,7 +127,7 @@ private void go2(){
         @Override
         public void run() {
             try{
-                sleep(40);
+                sleep(60);
             }catch (Exception e){e.printStackTrace();}
             finally {
                 Intent a=new Intent(getApplicationContext(),Locationout.class);

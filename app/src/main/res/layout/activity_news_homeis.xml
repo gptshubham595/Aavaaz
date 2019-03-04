@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".secondpage.Homeis">
 
+
     <ImageView
         android:id="@+id/button2"
         android:layout_width="40dp"

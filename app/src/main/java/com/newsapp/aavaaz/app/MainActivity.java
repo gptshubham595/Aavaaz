@@ -34,8 +34,7 @@ import maes.tech.intentanim.CustomIntent;
 
 import static java.lang.Thread.sleep;
 
-public class
-MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     String pass = "123456789";
     TextView textView;
     private DatabaseReference mDatabase,mi,usersref;
@@ -64,7 +63,7 @@ MainActivity extends AppCompatActivity {
         Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
         register_user(aid, id, pass, latitude,longitude,city,state,country);
-        loginUser(id,pass);
+
 
     }
 
@@ -85,7 +84,6 @@ MainActivity extends AppCompatActivity {
 
                     HashMap<String, String> userMap = new HashMap<>();
                     userMap.put("name", display_name);
-                    userMap.put("first","yes");
                     userMap.put("city", city);
                     userMap.put("state", state);
                     userMap.put("country", country);
@@ -128,7 +126,8 @@ MainActivity extends AppCompatActivity {
                     });
 
                 } else {
-                    //Toast.makeText(getApplicationContext(), "Sorry.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Logged In.", Toast.LENGTH_LONG).show();
+                    loginUser(email,pass);
                 }
 
             }
@@ -139,7 +138,7 @@ MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-                    sleep(300);
+                    sleep(10);
                 }
                 catch (Exception e){e.printStackTrace();}
                 finally {
