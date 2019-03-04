@@ -3,6 +3,7 @@ package com.newsapp.aavaaz.app;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,6 +40,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Home extends AppCompatActivity {
     String pass = "123456789";
+    static String url;
     TextView textView;
     private DatabaseReference mDatabase,usersref;
     private FirebaseAuth mAuth;
@@ -220,6 +222,17 @@ alluserlist=(RecyclerView) findViewById(R.id.recycler);
             protected void populateViewHolder(Alluserviewholder viewHolder, allusers model, final int position) {
                 viewHolder.setHeading(model.getHeading());
                 viewHolder.setImage(model.getImage());
+                viewHolder.setUrl(model.getUrl());
+                final String userid=getRef(position).getKey();
+                viewHolder.mview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(),"click",Toast.LENGTH_SHORT).show();
+
+                        //Intent Browser=new Intent(Intent.ACTION_VIEW,Uri.parse(url));
+                        //startActivity(Browser);
+                    }
+                });
             }
         };
         alluserlist.setAdapter(firebaseRecyclerAdapter);
@@ -233,6 +246,11 @@ alluserlist=(RecyclerView) findViewById(R.id.recycler);
         public void setHeading(String heading){
             TextView name = (TextView) mview.findViewById(R.id.heading);
             name.setText(heading);
+        }
+        public void setUrl(String url2){
+            url=url2;
+            //TextView name = (TextView) mview.findViewById(R.id.heading);
+            //name.setText(heading);
         }
         public void setImage(final String user_thumb_image){
             final ImageView thumb_image = (ImageView) mview.findViewById(R.id.trendingimage);
