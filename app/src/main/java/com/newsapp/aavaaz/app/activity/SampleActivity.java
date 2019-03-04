@@ -42,6 +42,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.newsapp.aavaaz.app.MainActivity;
 import com.newsapp.aavaaz.app.MainActivity2;
+import com.newsapp.aavaaz.app.MainActivity3;
 import com.newsapp.aavaaz.app.secondpage.Homeis;
 import com.newsapp.aavaaz.app.start.Start1;
 import com.newsapp.aavaaz.base.LocationBaseActivity;

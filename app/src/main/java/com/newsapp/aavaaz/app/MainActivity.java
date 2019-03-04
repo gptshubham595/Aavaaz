@@ -34,7 +34,8 @@ import maes.tech.intentanim.CustomIntent;
 
 import static java.lang.Thread.sleep;
 
-public class MainActivity extends AppCompatActivity {
+public class
+MainActivity extends AppCompatActivity {
     String pass = "123456789";
     TextView textView;
     private DatabaseReference mDatabase,mi,usersref;

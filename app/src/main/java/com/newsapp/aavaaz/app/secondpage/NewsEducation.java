@@ -1,5 +1,4 @@
-package com.newsapp.aavaaz.app
-.secondpage;
+package com.newsapp.aavaaz.app.secondpage;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -112,7 +111,7 @@ public class NewsEducation extends AppCompatActivity implements GestureDetector.
         DisplayMetrics displayMetrics=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int screenh=displayMetrics.heightPixels;
-        Toast.makeText(getApplicationContext(),screenh+"",Toast.LENGTH_SHORT).show();
+        
         //int screenw=displayMetrics.widthPixels;
         int imgh=(int)(screenh* .35);
         //==============================================================

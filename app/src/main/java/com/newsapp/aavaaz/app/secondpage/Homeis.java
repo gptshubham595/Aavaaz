@@ -1,5 +1,4 @@
-package com.newsapp.aavaaz.app
-.secondpage;
+package com.newsapp.aavaaz.app.secondpage;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -116,7 +115,7 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
         int screenh=displayMetrics.heightPixels;
         //int screenw=displayMetrics.widthPixels;
         int imgh=(int)(screenh* .35);
-        Toast.makeText(getApplicationContext(),screenh+"",Toast.LENGTH_SHORT).show();
+        
         int texth1=(int)(screenh*0.0864);
         int texth2=(int)(screenh*0.00724);
         int texth3=(int)(screenh*0.006724);
