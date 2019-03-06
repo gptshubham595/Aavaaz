@@ -227,8 +227,7 @@ alluserlist=(RecyclerView) findViewById(R.id.recycler);
                 viewHolder.mview.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(),"click",Toast.LENGTH_SHORT).show();
-
+                        
                         //Intent Browser=new Intent(Intent.ACTION_VIEW,Uri.parse(url));
                         //startActivity(Browser);
                     }

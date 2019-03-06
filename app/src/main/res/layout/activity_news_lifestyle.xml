@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:outlineAmbientShadowColor="@color/colorPrimary"
@@ -8,9 +8,11 @@
     android:layout_height="match_parent"
     tools:context=".secondpage.NewsLifestyle">
 
+   
+
     <ImageView
         android:id="@+id/button2"
-        android:layout_width="60dp"
+        android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:background="@drawable/home"
@@ -60,7 +62,17 @@
         android:background="@drawable/shape6"
         app:layout_constraintTop_toBottomOf="@id/desc">
 
- 
+        <TextView
+            android:id="@+id/newis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="@font/glegoo"
+            android:text=""
+            android:textColor="#ffffff"
+            android:textSize="0sp"
+            />
+
         <TextView
             android:id="@+id/urllink"
             android:layout_width="wrap_content"
@@ -70,7 +82,7 @@
             android:text=""
             android:textColor="#ffffff"
             android:textSize="17sp"
-         />
+            app:layout_constraintTop_toBottomOf="@id/newis" />
     </android.support.constraint.ConstraintLayout>
 
 
@@ -79,22 +91,22 @@
         android:layout_below="@id/read"
         android:layout_height="wrap_content">	<Button
         android:id="@+id/up"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:background="@drawable/like" />
 
         <Button
             android:id="@+id/down"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_toEndOf="@id/up"
             android:background="@drawable/dislike"
             android:textColor="#615c5c" />
 
-        <Button
+      <Button
             android:id="@+id/tags"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -106,7 +118,7 @@
             android:textColor="#615c5c"
             android:typeface="sans" />
 
-        <Button
+            <Button
             android:id="@+id/share"
             android:layout_width="120dp"
             android:layout_height="wrap_content"

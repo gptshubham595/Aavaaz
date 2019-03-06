@@ -208,9 +208,7 @@ public class MainActivity2 extends AppCompatActivity {
 
             // location last updated time
             //   txtUpdatedOn.setText("Last updated on: " + mLastUpdateTime);
-        }else{Toast.makeText(getApplicationContext(),"Sorry Please turn your mobile data and location ON",Toast.LENGTH_SHORT).show();
-            Toast.makeText(getApplicationContext(),"Sorry Please open app again",Toast.LENGTH_SHORT).show();
-        }
+        }else{        }
 
         // toggleButtons();
     }
