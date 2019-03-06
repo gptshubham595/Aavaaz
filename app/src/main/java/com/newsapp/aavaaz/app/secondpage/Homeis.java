@@ -48,7 +48,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import com.newsapp.aavaaz.app.Locationout;
+
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -134,24 +134,22 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
         //text3.setTextSize(TypedValue.COMPLEX_UNIT_SP,texth3);
         //text4.setTextSize(TypedValue.COMPLEX_UNIT_SP,texth4);
         //lay.getLayoutParams().height=texth5;
+
         //==============================================================
         //         i=super.getIntent().getExtras().getInt("i");
         //  Toast.makeText(getApplicationContext(),i+"",Toast.LENGTH_SHORT).show();
-
-		////video=findViewById(R.id.////video);
-		
+		//video=findViewById(R.id.video);
         Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
         /*if (isFirstRun) {
             //Toast.makeText(getApplicationContext(), "Registering You!!", Toast.LENGTH_LONG).show();
             dialog.setContentView(R.layout.instruction_dialog);
             dialog.show();
-
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                     .putBoolean("isFirstRun", false).apply();
         }*/
-
 //======================================================================
+
         heading = findViewById(R.id.heading);
         mAuth = FirebaseAuth.getInstance();
 
@@ -160,9 +158,9 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
         String uid = current_user.getUid();
 
 
-//[========================= Added Now
+        //========================= Added Now
         //========================================
-  DatabaseReference mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last").child("Homeis");
+        DatabaseReference mi = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Last").child("Homeis");
         mi.keepSynced(true);
 
         mi.addValueEventListener(new ValueEventListener() {
@@ -182,7 +180,6 @@ public class Homeis extends AppCompatActivity implements GestureDetector.OnGestu
 
             }
         });
-
 
         //==========================================
         imageView=findViewById(R.id.button2);

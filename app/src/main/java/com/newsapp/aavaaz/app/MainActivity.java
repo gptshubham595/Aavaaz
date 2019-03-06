@@ -11,7 +11,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
 import com.google.firebase.database.ValueEventListener;
-import com.newsapp.aavaaz.app.activity.SampleActivity;
 import com.newsapp.aavaaz.app.secondpage.Homeis;
 
 import android.provider.Settings;
@@ -48,10 +47,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        city = super.getIntent().getExtras().getString("city");
-
-        state = super.getIntent().getExtras().getString("sate");
-        country = super.getIntent().getExtras().getString("country");
         latitude = super.getIntent().getExtras().getString("lat");
         longitude = super.getIntent().getExtras().getString("lon");
         //Toast.makeText(getApplicationContext(),city,Toast.LENGTH_SHORT).show();
@@ -142,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 catch (Exception e){e.printStackTrace();}
                 finally {
-                    Intent a=new Intent(getApplicationContext(),MainActivity2.class);
+                    Intent a=new Intent(getApplicationContext(),Homeis.class);
                     startActivity(a);
                     CustomIntent.customType(MainActivity.this,"fadein-to-fadeout");
                 }

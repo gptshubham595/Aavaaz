@@ -11,7 +11,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
 import com.google.firebase.database.ValueEventListener;
-import com.newsapp.aavaaz.app.activity.SampleActivity;
 import com.newsapp.aavaaz.app.secondpage.Homeis;
 
 import android.provider.Settings;
@@ -42,7 +41,7 @@ public class MainActivity3 extends AppCompatActivity {
     Dialog dialog;
     TextView heading;
     int i = 0;
-    public static String aid,longitude="1",latitude="1",city="1",state="1",country="1",first;
+    public static String aid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,11 +66,11 @@ public class MainActivity3 extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-               //     sleep(10);
+                   sleep(100);
                 }
                 catch (Exception e){e.printStackTrace();}
                 finally {
-                    Intent a=new Intent(getApplicationContext(),MainActivity2.class);
+                    Intent a=new Intent(getApplicationContext(),Homeis.class);
                     startActivity(a);
                     CustomIntent.customType(MainActivity3.this,"fadein-to-fadeout");
                 }
@@ -86,11 +85,12 @@ public class MainActivity3 extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-             //       sleep(10);
+                    //sleep(10);
                 }
                 catch (Exception e){e.printStackTrace();}
                 finally {
-                    Intent a=new Intent(getApplicationContext(),SampleActivity.class);
+                    //Intent a=new Intent(getApplicationContext(),MainActivity2.class);
+                    Intent a=new Intent(getApplicationContext(),MainActivity2.class);
                     startActivity(a);
                     CustomIntent.customType(MainActivity3.this,"fadein-to-fadeout");
                 }
