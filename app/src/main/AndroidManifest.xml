@@ -92,7 +92,11 @@
             android:name="com.newsapp.aavaaz.app.thirdpage.NewsAgricultureFull"
             android:parentActivityName="com.newsapp.aavaaz.app.secondpage.NewsAgriculture"
             android:screenOrientation="portrait" />
-        <activity
+      
+<activity
+            android:name="com.newsapp.aavaaz.app.thirdpage.NewsHomeisFull"
+            android:parentActivityName="com.newsapp.aavaaz.app.secondpage.Homeis"
+            android:screenOrientation="portrait" />  <activity
             android:name="com.newsapp.aavaaz.app.thirdpage.NewsSportsFull"
             android:parentActivityName="com.newsapp.aavaaz.app.secondpage.NewsSports"
             android:screenOrientation="portrait" />
